@@ -1,0 +1,74 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bosh sahifa</title>
+    <meta name="description" content="Online kirim-chikim">
+    <meta content="Artiqbayev Abdulboriy" name="author">
+    <link rel="shortcut icon" href="{% static 'img/crm_logo.png' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      darkMode: "class"
+    }
+    </script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css">
+</head>
+<body style="width:100%;">
+
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
+        <a href="/" class="flex items-center">
+            <img src="{% static 'img/crm.png' %}" class="h-16" style="margin-left:-30px;" alt="Flowbite Logo" />
+            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white" style="margin-left:-30px;">Xisob-kitob</span>
+        </a>
+        <div class="flex items-center">
+            <a href="#" class="mr-6 text-sm font-medium text-black-600 dark:text-black-500 hover:underline"><i class="fas fa-user"></i><span class="ml-3">{{request.user.username}}</span></a>
+        </div>
+    </div>
+</nav>
+<nav class="bg-gray-50 dark:bg-gray-700">
+    <div class="max-w-screen-xl  py-3 mx-auto md:px-6">
+        <div class="flex items-center ">
+            <center>
+            <ul class="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
+                <li><a href="" class="mr-3"></a>
+                    <a href="/" class="text-gray-900 dark:text-white hover:underline">Asosiy</a>
+                </li>
+                <li>
+                    <a href="#" class="text-gray-900 dark:text-white hover:underline">Tushum</a>
+                </li>
+                <li>
+                    <a href="#" class="text-gray-900 dark:text-white hover:underline">Chikim</a>
+                </li>
+                <li>
+                    <a href="#" class="text-gray-900 dark:text-white hover:underline">Umumiy</a>
+                </li>
+            </ul>
+            </center>
+        </div>
+    </div>
+</nav>
+<center>
+<main class="login">
+    <div class="form container" style="min-height: 350px; display: flex;  flex-direction: column;  justify-content: center;">
+        <h1 class="text-2xl">Hisobdan chiqildi</h1>
+        <h3 class="text-xl"><a href="{% url 'account:login'%}" class="h3 text-blue-500">Qayta kiring</a> <span class="h4">yoki </span> <a href="{% url 'account:register'%}" class="h3 text-blue-500">Ro’yxatdan o’ting</a></h5>
+
+    </div>
+</main>
+</center>
+<style>
+    html{
+      height: 100vh !important;
+      overflow: auto !important;
+    }
+    body{
+      height: 100vh;
+      overflow: auto;
+    }
+    </style>
+</body>
+</html>

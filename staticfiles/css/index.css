@@ -1,0 +1,60 @@
+.table_xr {
+  color: black;
+  text-decoration: none;
+}
+#number_of_table {
+  padding-left: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#table_kub_gas {
+  padding-left: 110px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#table_head {
+  background-color: #cfe2ff;
+}
+#table_head_word {
+  margin-left: 200px;
+}
+#img_of_add {
+  width: 75px;
+}
+#input_add_gas {
+  width: auto;
+}
+#add_gas_box {
+  border-radius: 20px;
+  width: 350px;
+  background-color: #1d98ffff;
+}
+
+@media (max-width: 670px) {
+  #number_of_table {
+    padding-left: 50px;
+  }
+  #table_scroll {
+    width: 670px;
+  }
+  #table_kub_gas {
+    padding-left: 60px;
+  }
+  #table_head_word {
+    margin-left: 100px;
+  }
+}
+@media (max-width: 450px) {
+  #number_of_table {
+    padding-left: 10px;
+  }
+  #table_kub_gas {
+    padding-left: 20px;
+  }
+  #img_of_add {
+    width: 60px;
+  }
+  #table_head_word {
+    margin-left: 50px;
+  }
+}
