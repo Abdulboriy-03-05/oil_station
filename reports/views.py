@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from .forms import *
+from .models import *
 # Create your views here.
 
 def home(request):
@@ -18,14 +19,18 @@ def home(request):
 
 
 
-def addmaingas(request):
+def addmaingas(request,):
+    main_xr = Main_XR.objects.all()
     if request.user.is_staff:
         if request.method == "POST":
             form = AddMainGasForm(request.POST)
             if form.is_valid():
                 f = form.save()
-                print(f.mian_gas)
-                print(f.buygasprice)
+                print(f)
+                main_xr == f
+                print(main_xr)
+                # print(f.buygasprice)
+                # print(main_xr)
                 return redirect('/')
         else:
             form = AddMainGasForm()
