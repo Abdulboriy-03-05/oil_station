@@ -86,6 +86,19 @@ class Losegas(models.Model):
         return f"{self.losegas}"
 
 
+class Aksiz(models.Model):
+    aksiz = models.IntegerField('Aksiz so\'lig\'',default=680,null=True,blank=True)
+    date = models.DateField("Vaqt", auto_now_add=True,)
+
+    class Meta:
+        ordering = ["-id"]
+        verbose_name = " Aksiz so'lig'"
+        verbose_name_plural = " Aksiz so'lig'"
+    
+    def __str__(self):
+        return f"{self.aksiz}"
+
+
 
 class Addmaingas(models.Model):
     author = models.ForeignKey(User, verbose_name='User', on_delete=models.DO_NOTHING, default=None, null=True)
@@ -96,8 +109,10 @@ class Addmaingas(models.Model):
     remain = models.FloatField("Tani",null=True,blank=True)
     buygasprice = models.IntegerField("Olinga narx",null=True,blank=True)
     salegasprice = models.IntegerField("Sotilgan narx",null=True,blank=True)
+    aksiz = models.IntegerField("Aksiz narx",null=True,blank=True)
     buy_sum = models.IntegerField("Umumiy(ol sum)",null=True,blank=True)
     sale_sum = models.IntegerField("Umumiy(sot sum)",null=True,blank=True)
+    aksiz_sum = models.IntegerField("Aksiz narxi", null=True,blank=True)
     date = models.DateField("Vaqt", auto_now_add=True,)
 
     class Meta:
@@ -106,7 +121,7 @@ class Addmaingas(models.Model):
         verbose_name_plural = "Asosiy gaz xisoblagich X/R"
     
     def __str__(self):
-        return f"{self.author}"
+        return f"{self.category}"
     
 
 
@@ -119,6 +134,9 @@ class Main_XR(models.Model):
     class Meta:
         ordering = ["-id"]
         verbose_name = "Asosiy X/R"
+    
+    def __str__(self):
+        return f"{self.category}"
 
 class Main_XR_income(models.Model):
     category = models.ForeignKey(Filial,verbose_name="Main_XR_in_out", on_delete=models.DO_NOTHING, default=None,null=True,related_name="main_in_out")
@@ -130,3 +148,50 @@ class Main_XR_income(models.Model):
     class Meta:
         ordering = ["-id"]
         verbose_name = "Asosiy IN OUT X/R"
+    
+    def __str__(self):
+        return f"{self.category}"
+    
+
+class Xududgaz_XR(models.Model):
+    category = models.ForeignKey(Filial,verbose_name="Xududgaz", on_delete=models.DO_NOTHING, default=None,null=True,related_name="xududgaz")
+    bill = models.IntegerField("Xududgaz xisob", default=0,null=True,blank=True)
+    date = models.DateField("Vaqt", auto_now_add=True)
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = "Xududgaz xisob"
+
+    def __str__(self):
+        return f"{self.category}"
+    
+
+
+class Xudud_XR_income(models.Model):
+    category = models.ForeignKey(Filial,verbose_name="Xudud_in_out", on_delete=models.DO_NOTHING, default=None,null=True,related_name="xudud_in_out")
+    income = models.IntegerField("Xudud income",default=0,null=True,blank=True)
+    outcome = models.IntegerField("Xudud_outcome",default=0,null=True,blank=True)
+    date = models.DateField("Vaqt", auto_now_add=True,)
+
+
+    class Meta:
+        ordering = ["-id"]
+        verbose_name = "Xudud gaz IN OUT X/R"
+    
+    def __str__(self):
+        return f"{self.category}"
+    
+
+
+class Aksiz_XR(models.Model):
+    category = models.ForeignKey(Filial,verbose_name="Aksiz", on_delete=models.DO_NOTHING, default=None,null=True,related_name="aksiz")
+    bill = models.IntegerField("Aksiz xisob", default=0,null=True,blank=True)
+    date = models.DateField("Vaqt", auto_now_add=True)
+
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = "Aksiz xisob"
+
+    def __str__(self):
+        return f"{self.category}"

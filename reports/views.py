@@ -25,12 +25,14 @@ def category_list(request, category_slug):
     category = Filial.objects.get(slug=category_slug)
     reports = Addmaingas.objects.filter(category=category)
     main_xr = Main_XR.objects.get(category=category)
+    xudud_xr = Xududgaz_XR.objects.get(category=category)
     category_name = category_slug.capitalize()
     context = {
         "object_list":reports,
         "categories":obj,
         'category_name': category_name,
-        "main_xr":main_xr
+        "main_xr":main_xr,
+        "xudud_xr":xudud_xr,
         }
     return render(request, "cat.html", context)
 
@@ -41,6 +43,7 @@ def addmaingas(request):
     sale = Saleprice.objects.all()
     buy = Buyprice.objects.all()
     lose = Losegas.objects.all()
+    aksiz_tax = Aksiz.objects.all()
     if request.user.is_staff:
         if request.method == "POST":
             form = AddMainGasForm(request.POST)
@@ -81,12 +84,28 @@ def addmaingas(request):
                     f.buygasprice = x.buyprice
                     all_sum_buy = remain_gas * x.buyprice
                     f.buy_sum = all_sum_buy
-                    # print(lose_gas_2)
-                    # print(remain_gas)
-                    # print(all_sum)
-                    f.save()
-                    # print(f.salegasprice)
-                    # print(f.buygasprice)
+                xudud_xr = Xududgaz_XR.objects.get(category=cat)
+                xudud_xr_add = xudud_xr.bill
+                xudud_add = xudud_xr_add - all_sum_buy
+                print(xudud_add)
+                xudud_xr.bill = xudud_add
+                xudud_xr.save()
+
+                xudud_xr_outcome = Xudud_XR_income.objects.create(category=cat,outcome =xudud_add)
+                xudud_xr_outcome.save()
+
+                for a in aksiz_tax:
+                    f.aksiz = a.aksiz
+                    all_sum_aksiz = remain_gas * a.aksiz
+                    f.aksiz_sum = all_sum_aksiz
+                aksiz_xr = Aksiz_XR.objects.get(category=cat)
+                aksiz_xr_add = aksiz_xr.bill
+                aksiz_add = aksiz_xr_add - all_sum_aksiz
+                aksiz_xr.bill = aksiz_add
+                aksiz_xr.save()
+
+                f.save()
+
                 return redirect('/')
         else:
             form = AddMainGasForm()

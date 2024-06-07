@@ -82,7 +82,7 @@
           <tr>
             <th scope="row" id="number_of_table">2</th>
             <td><a href="" class="table_xr">Xudud gaz</a></td>
-            <td>60 000 000</td>
+            <td class="formatNum">{{xudud_xr.bill}}</td>
             <td>5 000 000</td>
           </tr>
           <tr>
@@ -125,10 +125,12 @@
               <th scope="col">Asosiy</th>
               <th scope="col">Yo'q(1.4%)</th>
               <th scope="col">Gaz ta'ni</th>
+              <th scope="col">Aksiz</th>
               <th scope="col">Olish</th>
               <th scope="col">Sotish</th>
-              <th scope="col">Olingan</th>
-              <th scope="col">Sotilgan</th>
+              <th scope="col">Aksiz</th>
+              <th scope="col">Olingan(gaz)</th>
+              <th scope="col">Sotilgan(gaz)</th>
               <th scope="col">Zap(Kub)</th>
               <th scope="col">Naqt</th>
               <th scope="col">Plas</th>
@@ -146,8 +148,10 @@
               <!-- <td><a href="" class="table_xr">{{obj.last_gas}}</a></td> -->
               <td class="formatKub">{{obj.lose}}</td>
               <td class="formatKub">{{obj.remain}}</td>
+              <td class="formatNum">{{obj.aksiz}}</td>
               <td class="formatNum">{{obj.buygasprice}}</td>
               <td class="formatNum">{{obj.salegasprice}}</td>
+              <td class="formatNum">{{obj.aksiz_sum}}</td>
               <td class="formatNum">{{obj.buy_sum}}</td>
               <td class="formatNum">{{obj.sale_sum}}</td>
               <td></td>

@@ -21,15 +21,28 @@ class LosegasAdmin(admin.ModelAdmin):
 
 @admin.register(Main_XR)
 class Main_XRAdmin(admin.ModelAdmin):
-    list_diplay = ["income","outcome"]
+    list_diplay = ["main"]
+
+@admin.register(Xududgaz_XR)
+class Xududgaz_XRAdmin(admin.ModelAdmin):
+    list_diplay = ["bill"]
+
+@admin.register(Aksiz_XR)
+class Aksiz_XRAdmin(admin.ModelAdmin):
+    list_diplay = ["bill"]
+
 
 @admin.register(Main_XR_income)
 class Main_XR_incomeAdmin(admin.ModelAdmin):
     list_diplay = ["income","outcome"]
 
-# @admin.register(Others_XR)
-# class Others_XRAdmin(admin.ModelAdmin):
-#     list_diplay = ['expense','profit']
+@admin.register(Xudud_XR_income)
+class Xudud_XR_incomeAdmin(admin.ModelAdmin):
+    list_diplay = ["income","outcome"]
+
+@admin.register(Aksiz)
+class Aksiz_XRAdmin(admin.ModelAdmin):
+    list_diplay = ['aksiz']
 
 @admin.register(Addmaingas)
 class AddmaingasAdmin(admin.ModelAdmin):
