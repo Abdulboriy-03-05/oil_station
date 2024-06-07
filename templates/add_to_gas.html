@@ -1,4 +1,4 @@
-{% load static %}
+{% load bootstrap4 %} {% load static %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,14 +10,14 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="/static/css/index.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
           <img
-            src="img/vecteezy_gas-pump-clipart-design-illustration_9400880.png"
+            src="/static/img/vecteezy_gas-pump-clipart-design-illustration_9400880.png"
             width="50"
             alt="Picture"
           />
@@ -35,32 +35,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            {% for cat in categories %}
             <li class="nav-item">
               <a
                 class="nav-link active m-1"
                 aria-current="page"
-                href="director.html"
-                ><h6>Asosiy</h6></a
+                href="{{cat.get_url}}"
+                ><h6>{{ cat.name }}</h6></a
               >
             </li>
-            <li class="nav-item">
-              <a
-                class="nav-link active m-1"
-                aria-current="page"
-                href="last_gases.html"
-                ><h6>Gaz</h6></a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active m-1" aria-current="page" href="#"
-                ><h6>Benzin 80</h6></a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active m-1" aria-current="page" href="#"
-                ><h6>Benzin 92</h6></a
-              >
-            </li>
+            {% endfor %}
           </ul>
         </div>
       </div>
@@ -71,33 +55,8 @@
         <div class="p-2" id="add_gas_box">
           <h5 class="p-3 text-light">Gazni kiritish</h5>
           <form action="" method="post">
-            {% csrf_token %}
-            <!-- Sotlgan gaz input -->
-            <div data-mdb-input-init class="form-outline mb-4">
-              <label class="form-label text-light" for="form4Example1"
-                >Sotilgan gaz* (kub)</label
-              >
-              <!-- <input type="number" id="input_add_gas" class="form-control" /> -->
-              {{form.mian_gas}}
-            </div>
-
-            <!-- Olingan narx input -->
-            <div data-mdb-input-init class="form-outline mb-4">
-              <label class="form-label text-light" for="form4Example2"
-                >Olinga narxi*</label
-              >
-              <!-- <input type="number" id="input_add_gas" class="form-control" /> -->
-              {{form.buygasprice}}
-            </div>
-
-            <!-- Olingan narx input -->
-            <!-- <div data-mdb-input-init class="form-outline mb-4">
-              <label class="form-label text-light" for="form4Example2"
-                >Sotilgan narxi*</label
-              >
-              <input type="number" id="input_add_gas" class="form-control" />
-            </div> -->
-
+            {% csrf_token %} {% bootstrap_form for %}
+            <br /><br />
             <!-- Submit button -->
             <button
               data-mdb-ripple-init
@@ -110,33 +69,46 @@
         </div>
       </div>
     </center>
+
     <br /><br />
+    <style>
+      label {
+        padding: 10px;
+        color: white;
+      }
+      #input_add_gas {
+        width: 270px;
+        height: 40px;
+        border-radius: 10px;
+        border: white;
+      }
+    </style>
     <!-- Footer -->
-    <footer class="text-center" style="background-color: rgba(0, 0, 0, 0.05)">
-      <!-- Grid container -->
-      <div class="container p-4 pb-0">
-        <!-- Section: Social media -->
-        <section class="mb-4">
-          <!-- Facebook -->
-          <a
-            data-mdb-ripple-init
+    <!-- <footer class="text-center" style="background-color: rgba(0, 0, 0, 0.05)"> -->
+    <!-- Grid container -->
+    <!-- <div class="container p-4 pb-0"> -->
+    <!-- Section: Social media -->
+    <!-- <section class="mb-4"> -->
+    <!-- Facebook -->
+    <!-- <a -->
+    <!-- data-mdb-ripple-init
             class="btn text-dark btn-floating"
             href="#!"
             role="button"
             >Asosiy</a
-          >
+          > -->
 
-          <!-- Twitter -->
-          <a
+    <!-- Twitter -->
+    <!-- <a
             data-mdb-ripple-init
             class="btn text-dark btn-floating"
             href="#!"
             role="button"
             >Gaz</a
-          >
+          > -->
 
-          <!-- Google -->
-          <a
+    <!-- Google -->
+    <!-- <a
             data-mdb-ripple-init
             class="btn text-dark btn-floating"
             href="#!"
@@ -150,18 +122,18 @@
             role="button"
             >Ben 92</a
           >
-        </section>
-        <!-- Section: Social media -->
-      </div>
-      <!-- Grid container -->
+        </section> -->
+    <!-- Section: Social media -->
+    <!-- </div> -->
+    <!-- Grid container -->
 
-      <!-- Copyright -->
-      <div class="text-center p-3 pt-0">
+    <!-- Copyright -->
+    <!-- <div class="text-center p-3 pt-0">
         © 2024 Copyright:
         <a class="text-body" href="#"></a>
-      </div>
-      <!-- Copyright -->
-    </footer>
+      </div> -->
+    <!-- Copyright -->
+    <!-- </footer> -->
     <!-- Footer end -->
   </body>
   <script

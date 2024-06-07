@@ -9,13 +9,13 @@ from django.contrib import messages
 from .forms import *
 from .models import User
 # Create your views here.
-class ProfileView(LoginRequiredMixin, DetailView):
-    model = User
-    template_name = 'main/profile.html'
+# class ProfileView(LoginRequiredMixin, DetailView):
+#     model = User
+#     template_name = 'main/profile.html'
 
-    def get_object(self):
-        user = User.objects.get(id=self.request.user.id)
-        return user
+#     def get_object(self):
+#         user = User.objects.get(id=self.request.user.id)
+#         return user
 
 
 def register(request):

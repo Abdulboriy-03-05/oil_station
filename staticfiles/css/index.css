@@ -29,14 +29,17 @@
   width: 350px;
   background-color: #1d98ffff;
 }
+#table_scroll {
+  width: 2000px;
+}
 
 @media (max-width: 670px) {
   #number_of_table {
     padding-left: 50px;
   }
-  #table_scroll {
-    width: 670px;
-  }
+  /* #table_scroll {
+    width: 2000px;
+  } */
   #table_kub_gas {
     padding-left: 60px;
   }
