@@ -73,6 +73,11 @@
                 {{request.user.username}}
               </h6>
             </li>
+            {% if request.user.username = 'Abdulboriy' %}
+            <li class="nav-item">
+              <a href="{% url 'account/login' %}">Login</a>
+            </li>
+            {% endif %}
           </ul>
         </div>
       </div>
