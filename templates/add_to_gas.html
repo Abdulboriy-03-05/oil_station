@@ -51,9 +51,9 @@
     </nav>
     <br /><br />
     <center>
-      <div class="container">
+      <div class="">
         <div class="p-2" id="add_gas_box">
-          <h5 class="p-3 text-light">Gazni kiritish</h5>
+          <h5 class="p-3 text-light">Gaz xisoblagichni kiriting</h5>
           <form action="" method="post">
             {% csrf_token %} {% bootstrap_form for %}
             <br /><br />
@@ -84,56 +84,32 @@
       }
     </style>
     <!-- Footer -->
-    <!-- <footer class="text-center" style="background-color: rgba(0, 0, 0, 0.05)"> -->
-    <!-- Grid container -->
-    <!-- <div class="container p-4 pb-0"> -->
-    <!-- Section: Social media -->
-    <!-- <section class="mb-4"> -->
-    <!-- Facebook -->
-    <!-- <a -->
-    <!-- data-mdb-ripple-init
-            class="btn text-dark btn-floating"
-            href="#!"
-            role="button"
-            >Asosiy</a
-          > -->
-
-    <!-- Twitter -->
-    <!-- <a
-            data-mdb-ripple-init
-            class="btn text-dark btn-floating"
-            href="#!"
-            role="button"
-            >Gaz</a
-          > -->
-
-    <!-- Google -->
-    <!-- <a
-            data-mdb-ripple-init
-            class="btn text-dark btn-floating"
-            href="#!"
-            role="button"
-            >Ben 80</a
-          >
+    <footer class="text-center" style="background-color: rgba(0, 0, 0, 0.05)">
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+          {% for cat in categories %}
           <a
             data-mdb-ripple-init
             class="btn text-dark btn-floating"
             href="#!"
             role="button"
-            >Ben 92</a
+            >{{cat.name}}</a
           >
-        </section> -->
-    <!-- Section: Social media -->
-    <!-- </div> -->
-    <!-- Grid container -->
+          {% endfor %}
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
 
-    <!-- Copyright -->
-    <!-- <div class="text-center p-3 pt-0">
+      <!-- Copyright -->
+      <div class="text-center p-3 pt-0">
         © 2024 Copyright:
         <a class="text-body" href="#"></a>
-      </div> -->
-    <!-- Copyright -->
-    <!-- </footer> -->
+      </div>
+      <!-- Copyright -->
+    </footer>
     <!-- Footer end -->
   </body>
   <script

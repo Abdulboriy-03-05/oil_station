@@ -8,12 +8,10 @@ class UserRegisterForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('name', 'surname', 'username', 'phone')
+        fields = ('name','username',"number")
         widgets = {
             "username":forms.widgets.TextInput(attrs={'class':'input', 'placeholder':'Foydalanuvchi nomi', 'autocomplete':"off"}),
             "name":forms.widgets.TextInput(attrs={'class':'input', 'placeholder':'Ismingiz', 'autocomplete':"off"}),
-            "surname":forms.widgets.TextInput(attrs={'class':'input', 'placeholder':'Familyangiz', 'autocomplete':"off"}),
-            "phone":forms.widgets.TextInput(attrs={'class':'input', 'placeholder':'Nomeringiz', 'autocomplete':"off"}),
         }
 
 

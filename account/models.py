@@ -5,9 +5,8 @@ from django.conf import settings
 
 class User(AbstractUser):
     name = models.CharField("Name", max_length=256)
-    surname = models.CharField("Surname", max_length=256)
     username = models.CharField("Username", max_length=256, unique=True,)
-    phone = models.CharField("Phone number", max_length=15,)
+    number = models.IntegerField("Id raqami",null=True,blank=True)
 
 
     USERNAME_FIELD = "username"

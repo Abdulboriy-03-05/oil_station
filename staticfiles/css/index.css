@@ -29,19 +29,33 @@
   width: 350px;
   background-color: #1d98ffff;
 }
-#table_scroll {
-  width: 3000px;
+#table_scroll_3 {
+  width: 2000px;
 }
-
+@media (max-width: 1260px) {
+  #table_scroll_2 {
+    width: 1500px;
+  }
+}
 @media (max-width: 670px) {
   #number_of_table {
     padding-left: 50px;
   }
-  /* #table_scroll {
-    width: 2000px;
-  } */
+  #table_scroll {
+    width: 500px;
+  }
+  #table_scroll_2 {
+    width: 1000px;
+  }
+  #table_scroll_3 {
+    width: 1500px;
+  }
   #table_kub_gas {
     padding-left: 60px;
+  }
+  #table_head {
+    background-color: #cfe2ff;
+    width: auto;
   }
   #table_head_word {
     margin-left: 100px;

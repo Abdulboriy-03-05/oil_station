@@ -29,16 +29,23 @@
   width: 350px;
   background-color: #1d98ffff;
 }
+#table_scroll {
+  width: 3000px;
+}
 
 @media (max-width: 670px) {
   #number_of_table {
     padding-left: 50px;
   }
   #table_scroll {
-    width: 670px;
+    width: 2000px;
   }
   #table_kub_gas {
     padding-left: 60px;
+  }
+  #table_head {
+    background-color: #cfe2ff;
+    width: auto;
   }
   #table_head_word {
     margin-left: 100px;

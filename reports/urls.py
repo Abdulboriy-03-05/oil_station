@@ -7,4 +7,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path("<str:category_slug>/category/", views.category_list, name="category_list"),
     path("add_to_maingas",views.addmaingas,name='add_to_maingas'),
+    path("add_to_incoms",views.addincome,name='add_to_incomes'),
+    path("station_add_gas",views.station_add_gas,name='station_add_gas'),
+    path("add_card_incomes",views.add_card_income,name='add_card_income'),
 ]

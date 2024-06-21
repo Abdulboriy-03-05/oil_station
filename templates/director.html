@@ -11,7 +11,7 @@
     />
     <link rel="stylesheet" href="/static/css/index.css" />
   </head>
-  <body>
+  <body style="width: 100%;">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
@@ -40,23 +40,22 @@
                 ><h6>Asosiy</h6></a
               >
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link active m-1" aria-current="page" href="#"
                 ><h6>Gaz</h6></a
               >
+            </li> -->
+            <li class="nav-item">
+              <img
+                style="margin-top: 13px; margin-left: 40px"
+                src="/static/img/person.svg"
+                alt=""
+              />
             </li>
             <li class="nav-item">
-              <a class="nav-link active m-1" aria-current="page" href="#"
-                ><h6>Benzin 80</h6></a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active m-1" aria-current="page" href="#"
-                ><h6>Benzin 92</h6></a
-              >
-            </li>
-            <li class="nav-item">
-              <h6 class="" style="padding: 13px">{{request.user.username}}</h6>
+              <h6 class="" style="margin-top: 2px; padding: 10px">
+                {{request.user.username}}
+              </h6>
             </li>
           </ul>
         </div>
@@ -65,80 +64,67 @@
     <!-- Navbar end -->
 
     <!-- Gaz  -->
-    <div class="table-responsive" id="table_head">
-      <div class="row w-100">
-        <div class="col-10">
-          <h5 class="text-center p-3" id="table_head_word">
-            Oxirgi sotilgan gazlar
-          </h5>
-        </div>
-        <div class="col-2 mt-3 text-start">
-          <a href="#">
-            <img
-              id="img_of_add"
-              src="/static/img/Plus-Symbol-Vector-PNG-Clipart.png"
-              alt=""
-            />
-          </a>
-        </div>
+  <div id="table_head">
+    <div class="row w-100" style="background-color: #CFE2FFFF; width:100%;">
+      <div class="col-10">
+        <h5 class="text-center p-3" id="table_head_word">
+          Oxirgi sotilgan gazlar
+        </h5>
       </div>
-      <table class="table table-primary" id="table_scroll">
+      <div class="col-2 mt-3 text-start">
+        <a href="{% url 'main:station_add_gas' %}">
+          <img
+          id="img_of_add"
+          src="/static/img/Plus-Symbol-Vector-PNG-Clipart.png"
+          alt=""
+          />
+        </a>
+      </div>
+    </div>
+    <div class="table-responsive" id="table_head">
+        <table class="table table-primary" id="table_scroll_2">
         <thead>
           <tr>
-            <th scope="col" id="number_of_table">#</th>
-            <th scope="col">Kub</th>
-            <th scope="col">Sot</th>
+            <th scope="col" id="number_of_table">Xisoblagich</th>
+            <th scope="col">Sotilgan</th>
+            <th scope="col">1.4% Yo'q</th>
+            <th scope="col">Qolgan</th>
+            <th scope="col">Sotish</th>
             <th scope="col">Naqt</th>
-            <th scope="col">Plas</th>
-            <th scope="col">Umumiy</th>
+            <th scope="col">Plastik</th>
+            <th scope="col">Tashkilot</th>
+            <th scope="col">Tushum</th>
+            <th scope="col">Ja'mi</th>
             <th scope="col">Sana</th>
           </tr>
         </thead>
         <tbody>
+          {% for obj in object %}
           <tr>
-            <th scope="row" id="number_of_table">1</th>
-            <td><a href="" class="table_xr">1000</a></td>
-            <td>3 320</td>
-            <td>2 000 000</td>
-            <td>1 320 000</td>
-            <td>3 320 000</td>
-            <td>25.05.2024</td>
+            <th scope="row" id="number_of_table" class="formatKub">{{obj.counter}}</th>
+            <td><a href="" class="table_xr formatKub">{{obj.total_gas}}</a></td>
+            <td class="formatKub">{{obj.lose_gas}}</td>
+            <td class="formatKub">{{obj.gas}}</td>
+            <td class="formatNum">{{obj.sale_price}}</td>
+            <td class="formatNum">{{obj.chec}}</td>
+            <td class="formatNum">{{obj.card}}</td>
+            <td class="formatNum">{{obj.company}}</td>
+            <td class="formatNum">{{obj.sum_half}}</td>
+            <td class="formatNum">{{obj.total_sum}}</td>
+            <td>{{obj.date}}</td>
           </tr>
-          <tr>
-            <th scope="row" id="number_of_table">2</th>
-            <td><a href="" class="table_xr">1000</a></td>
-            <td>3 320</td>
-            <td>2 000 000</td>
-            <td>1 320 000</td>
-            <td>3 320 000</td>
-            <td>24.05.2024</td>
-          </tr>
-          <tr>
-            <th scope="row" id="number_of_table">3</th>
-            <td><a href="" class="table_xr">1000</a></td>
-            <td>3 320</td>
-            <td>2 000 000</td>
-            <td>1 320 000</td>
-            <td>3 320 000</td>
-            <td>23.05.2024</td>
-          </tr>
-          <tr>
-            <th scope="row" id="number_of_table">4</th>
-            <td><a href="" class="table_xr">1000</a></td>
-            <td>3 320</td>
-            <td>2 000 000</td>
-            <td>1 320 000</td>
-            <td>3 320 000</td>
-            <td>22.05.2024</td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
+    <div class="p-3">
+    </div>
+  </div>
     <!-- Gaz end -->
 
     <br /><br />
     <!-- Benzin 80  -->
-    <div id="table_head" class="table-responsive">
+    <!-- <div id="table_head" class="table-responsive">
       <div class="row w-100">
         <div class="col-10">
           <h5 class="text-center p-3" id="table_head_word">
@@ -211,11 +197,11 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
     <!-- Benzin end -->
-    <br /><br />
+    <!-- <br /><br /> -->
     <!-- Benzin 92  -->
-    <div id="table_head" class="table-responsive">
+    <!-- <div id="table_head" class="table-responsive">
       <div class="row w-100">
         <div class="col-10">
           <h5 class="text-center p-3" id="table_head_word">
@@ -288,34 +274,34 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
     <!-- Benzin end -->
     <!-- Footer -->
-    <footer class="text-center" style="background-color: rgba(0, 0, 0, 0.05)">
+    <!-- <footer class="text-center" style="background-color: rgba(0, 0, 0, 0.05)"> -->
       <!-- Grid container -->
-      <div class="container p-4 pb-0">
+      <!-- <div class="container p-4 pb-0"> -->
         <!-- Section: Social media -->
-        <section class="mb-4">
+        <!-- <section class="mb-4"> -->
           <!-- Facebook -->
-          <a
+          <!-- <a
             data-mdb-ripple-init
             class="btn text-dark btn-floating"
             href="#!"
             role="button"
             >Asosiy</a
-          >
+          > -->
 
           <!-- Twitter -->
-          <a
+          <!-- <a
             data-mdb-ripple-init
             class="btn text-dark btn-floating"
             href="#!"
             role="button"
             >Gaz</a
-          >
+          > -->
 
           <!-- Google -->
-          <a
+          <!-- <a
             data-mdb-ripple-init
             class="btn text-dark btn-floating"
             href="#!"
@@ -329,7 +315,7 @@
             role="button"
             >Ben 92</a
           >
-        </section>
+        </section> -->
         <!-- Section: Social media -->
       </div>
       <!-- Grid container -->
@@ -342,6 +328,26 @@
       <!-- Copyright -->
     </footer>
     <!-- Footer end -->
+    <script>
+      let nums = document.querySelectorAll(".formatNum");
+      const f = new Intl.NumberFormat("sp-UZ", {
+        style: "currency",
+        currency: "sum",
+      });
+      nums.forEach((num) => {
+        num.innerHTML = f.format(num.outerText);
+      });
+    </script>
+    <script>
+      let kubs = document.querySelectorAll(".formatKub");
+      const x = new Intl.NumberFormat("sp-UZ", {
+        style: "currency",
+        currency: "kub",
+      });
+      kubs.forEach((kub) => {
+        kub.innerHTML = x.format(kub.outerText);
+      });
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

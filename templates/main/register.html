@@ -31,16 +31,10 @@
       >
         <a href="/" class="flex items-center">
           <img
-            src="{% static 'img/crm.png' %}"
+            src="/static/img/vecteezy_gas-pump-clipart-design-illustration_9400880.png"
             class="h-16"
-            style="margin-left: -30px"
             alt="Flowbite Logo"
           />
-          <span
-            class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
-            style="margin-left: -30px"
-            >Xisob-kitob</span
-          >
         </a>
         <div class="flex items-center">
           <a
@@ -49,45 +43,6 @@
             ><i class="fas fa-user"></i
             ><span class="ml-3">{{request.user.username}}</span></a
           >
-        </div>
-      </div>
-    </nav>
-    <nav class="bg-gray-50 dark:bg-gray-700">
-      <div class="max-w-screen-xl py-3 mx-auto md:px-6">
-        <div class="flex items-center">
-          <center>
-            <ul class="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
-              <li>
-                <a href="" class="mr-3"></a>
-                <a
-                  href="/"
-                  class="text-gray-900 dark:text-white hover:underline"
-                  >Asosiy</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-900 dark:text-white hover:underline"
-                  >Tushum</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-900 dark:text-white hover:underline"
-                  >Chikim</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-900 dark:text-white hover:underline"
-                  >Umumiy</a
-                >
-              </li>
-            </ul>
-          </center>
         </div>
       </div>
     </nav>
@@ -124,20 +79,10 @@
                 class="block text-left text-gray-700 text-sm ml-4 mb-2"
                 for="username"
               >
-                Familya*
+                Id raqami*
               </label>
-              <i class="fa-solid fa-user-hair"></i>
-              {{ form.surname }}
-            </div>
-            <div class="mb-4">
-              <label
-                class="block text-left text-gray-700 text-sm ml-4 mb-2"
-                for="username"
-              >
-                No'mer*
-              </label>
-              <i class="fa-solid fa-user-hair"></i>
-              {{ form.phone }}
+              <i class="fa-light fa-user"></i>
+              {{ form.number }}
             </div>
             <div class="mb-4">
               <label
@@ -182,11 +127,11 @@
     <!-- Required for using jQuery input mask plugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js"></script>
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       $(document).ready(function () {
         $("#id_phone").inputmask("(99)999-99-99");
       });
-    </script>
+    </script> -->
     <style>
       #id_username {
         width: 200px;
@@ -195,6 +140,12 @@
         border: solid 2px #e8f0fe;
       }
       #id_name {
+        width: 200px;
+        padding: 5px;
+        border-radius: 5px;
+        border: solid 2px #e8f0fe;
+      }
+      #id_number {
         width: 200px;
         padding: 5px;
         border-radius: 5px;
