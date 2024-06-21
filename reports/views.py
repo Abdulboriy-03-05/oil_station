@@ -6,11 +6,39 @@ from .forms import *
 from .models import *
 # Create your views here.
 
-def home(request):
-    obj = Filial.objects.all()
+def home(request):  
     if request.user.is_staff:
+        total_monay = 0
+        total_buy_gas = 0
+        total_sale_gas = 0
+        obj = Filial.objects.all()
+        totals = Main_XR.objects.all()
+        yesterday = datetime.now() - timedelta(days=1)
+        total_buy_gases = Addmaingas.objects.filter(date=yesterday)
+        total_sale_gases = Manag_totals.objects.filter(date=yesterday) 
+
+
+        for total in totals:
+            total_monay += total.bill
+
+
+        for total in total_buy_gases:
+            total_buy_gas += total.last_gas
+
+
+        for total_gas in total_sale_gases:
+            total_sale_gas += total_gas.gas
+            
+
+
         context = {
-            "categories":obj
+            "categories":obj,
+            "total_monay":total_monay,
+            "totals":totals,
+            "total_buy_gas":total_buy_gas,
+            "total_buy_gases":total_buy_gases,
+            "total_sale_gas":total_sale_gas,
+            "total_sale_gases":total_sale_gases.reverse(),
         }
         return render(request, 'index.html',context,)
     
@@ -142,6 +170,7 @@ def addmaingas(request):
 
 def addincome(request):
     obj = Filial.objects.all()
+    send = Send.objects.get()
     if request.user.is_staff:
         if request.method == "POST":
             form = AddIncomeForm(request.POST)
@@ -149,15 +178,21 @@ def addincome(request):
                 f = form.save(commit=False)
                 cat = f.category
                 sum = f.sum
-                main_xr = Main_XR.objects.get(category=cat)
-                minus_xr = main_xr.bill
-                main_minus = minus_xr - sum
-                main_xr.bill = main_minus
-                main_xr.save()
-                main_outcome = Main_XR_outcome.objects.create(category=cat,outcome = sum,description=f.description)
-                main_outcome.save()
                 if str(f.income) == 'Xudud gaz':
                     print("Xudud gazga qo'shildi")
+                    send_tax = send.send_tax
+                    main_xr = Main_XR.objects.get(category=cat)
+                    minus_xr = main_xr.bill
+                    tax = sum / 100
+                    tax_1 = tax * send_tax
+                    tax_2 = sum + tax_1
+                    main_minus = minus_xr - tax_2
+                    main_xr.bill = main_minus
+                    main_xr.save()
+                    main_outcome = Main_XR_outcome.objects.create(category=cat,outcome = tax_2,description=f.description)
+                    main_outcome.save()
+
+
                     xudud_xr = Xududgaz_XR.objects.get(category=cat)
                     xudud_xr_add = xudud_xr.bill
                     xudud_add = xudud_xr_add + sum
@@ -171,6 +206,20 @@ def addincome(request):
 
                 if str(f.income) == 'Aksiz':
                     print("Aksiz soliq ga qo'shildo")
+
+                    send_tax = send.send_tax
+                    main_xr = Main_XR.objects.get(category=cat)
+                    minus_xr = main_xr.bill
+                    tax = sum / 100
+                    tax_1 = tax * send_tax
+                    tax_2 = sum + tax_1
+                    main_minus = minus_xr - tax_2
+                    main_xr.bill = main_minus
+                    main_xr.save()
+                    main_outcome = Main_XR_outcome.objects.create(category=cat,outcome = tax_2,description=f.description)
+                    main_outcome.save()
+
+                
                     aksiz_xr = Aksiz_XR.objects.get(category=cat)
                     aksiz_xr_add = aksiz_xr.bill
                     aksiz_add = aksiz_xr_add + sum
@@ -185,6 +234,20 @@ def addincome(request):
                     
                 if str(f.income) == 'Kredit':
                     print("Kredit ga qo'shilda")
+
+                    send_tax = send.send_tax
+                    main_xr = Main_XR.objects.get(category=cat)
+                    minus_xr = main_xr.bill
+                    tax = sum / 100
+                    tax_1 = tax * send_tax
+                    tax_2 = sum + tax_1
+                    main_minus = minus_xr - tax_2
+                    main_xr.bill = main_minus
+                    main_xr.save()
+                    main_outcome = Main_XR_outcome.objects.create(category=cat,outcome = tax_2,description=f.description)
+                    main_outcome.save()
+
+
                     credit_xr = Credit.objects.get(category=cat)
                     credit_xr_add = credit_xr.bill
                     credit_add = credit_xr_add - sum
@@ -196,7 +259,7 @@ def addincome(request):
                 else:
                     print("Kredit ga qo'shilmadi")
 
-                    
+
                 if str(f.income) == 'Boshqalar':
                     print("Boshqalar ga qo'shilda")
 

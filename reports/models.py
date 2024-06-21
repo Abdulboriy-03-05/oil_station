@@ -112,8 +112,8 @@ class Main_XR(models.Model):
     date = models.DateField("Vaqt", auto_now_add=True,)
 
     class Meta:
-        ordering = ["-id"]
         verbose_name = "Asosiy X/R"
+        verbose_name_plural = "Asosiy X/R"
     
     def __str__(self):
         return f"{self.category}"

@@ -13,7 +13,10 @@
   padding-bottom: 10px;
 }
 #table_head {
-  background-color: #cfe2ff;
+  background-color: lightskyblue;
+}
+#bg_col {
+  background-color: lightskyblue;
 }
 #table_head_word {
   margin-left: 200px;
@@ -54,7 +57,7 @@
     padding-left: 60px;
   }
   #table_head {
-    background-color: #cfe2ff;
+    background-color: lightskyblue;
     width: auto;
   }
   #table_head_word {
