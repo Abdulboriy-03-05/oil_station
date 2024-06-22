@@ -73,9 +73,11 @@
                 {{request.user.username}}
               </h6>
             </li>
-            {% if request.user.username = 'Abdulboriy' %}
+            {% if request.user.username == 'Abdulboriy' %}
             <li class="nav-item">
-              <a href="{% url 'account/login' %}">Login</a>
+              <a href="{% url 'account:login' %}"
+                ><h6 style="color: black; padding: 10px">Login</h6></a
+              >
             </li>
             {% endif %}
           </ul>
