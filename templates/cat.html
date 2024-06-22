@@ -73,149 +73,234 @@
         </div>
       </div>
     </nav>
-    <div id="table_head">
-      <h5 class="text-center p-3">{{category_name}} xisobotlar</h5>
-      <div class="table-responsive">
-        <table class="table" id="table_scroll">
-          <thead>
-            <tr>
-              <th id="bg_col" scope="col" style="padding-left: 30px">#</th>
-              <th id="bg_col" scope="col">X/R</th>
-              <th id="bg_col" scope="col">Qoldiq</th>
-              <th id="bg_col" scope="col">Ohirgi sarf</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td id="bg_col" style="padding-left: 30px">1</td>
-              <td id="bg_col"><a href="" class="table_xr">Asosiy</a></td>
-              <td id="bg_col" class="formatNum">
-                <a href="">{{main_xr.bill}}</a>
-              </td>
-              <td id="bg_col" class="formatNum"><a href="">{{out_main}}</a></td>
-            </tr>
-            <tr>
-              <td id="bg_col" style="padding-left: 30px">2</td>
-              <td id="bg_col"><a href="" class="table_xr">Xudud gaz</a></td>
-              <td id="bg_col" class="formatNum">{{xudud_xr.bill}}</td>
-              {% for out in out_xudud|slice:'1' %}
-              <td id="bg_col" class="formatNum">{{out.outcome}}</td>
-              {% endfor %}
-            </tr>
-            <tr>
-              <td id="bg_col" style="padding-left: 30px">3</td>
-              <td id="bg_col"><a href="" class="table_xr">Aksiz</a></td>
-              <td id="bg_col" class="formatNum">{{aksiz_xr.bill}}</td>
-              {% for out in out_aksiz|slice:'1' %}
-              <td id="bg_col" class="formatNum">{{out.outcome}}</td>
-              {% endfor %}
-            </tr>
-            <tr>
-              <td id="bg_col" style="padding-left: 30px">4</td>
-              <td id="bg_col"><a href="" class="table_xr">Tashkilotlar</a></td>
-              <td id="bg_col" class="formatNum">{{company.bill}}</td>
-              {% for out in out_company|slice:'1' %}
-              <td id="bg_col" class="formatNum">{{out.income}}</td>
-              {% endfor %}
-            </tr>
-            <tr>
-              <td id="bg_col" style="padding-left: 30px">5</td>
-              <td id="bg_col"><a href="" class="table_xr">Kredit</a></td>
-              <td id="bg_col" class="formatNum">{{cardit.bill}}</td>
-              {% for out in out_credit|slice:'1' %}
-              <td id="bg_col" class="formatNum">{{out.income}}</td>
-              {% endfor %}
-            </tr>
-            <tr>
-              <td id="bg_col" style="padding-left: 30px">6</td>
-              <td id="bg_col"><a href="" class="table_xr">Boshqalar</a></td>
-              <td id="bg_col" class="formatNum">{{other_today}}</td>
+    <div class="container">
+      <div class="shadow p-3 mb-5 bg-body rounded-3">
+        <h5 class="text-center p-3">{{category_name}} xisobotlar</h5>
+        <div class="table-responsive">
+          <table class="table" id="table_scroll">
+            <thead>
+              <tr>
+                <th scope="col" style="padding-left: 30px">#</th>
+                <th scope="col">X/R</th>
+                <th scope="col">Qoldiq</th>
+                <th scope="col">Ohirgi sarf</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding-left: 30px">1</td>
+                <td><a href="" class="table_xr">Asosiy</a></td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{main_xr.bill}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  <a href="">{{out_main}}</a>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding-left: 30px">2</td>
+                <td><a href="" class="table_xr">Xudud gaz</a></td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{xudud_xr.bill}}
+                </td>
+                {% for out in out_xudud|slice:'1' %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  <a href="">{{out.outcome}}</a>
+                </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td style="padding-left: 30px">3</td>
+                <td><a href="" class="table_xr">Aksiz</a></td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{aksiz_xr.bill}}
+                </td>
+                {% for out in out_aksiz|slice:'1' %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  <a href="">{{out.outcome}}</a>
+                </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td style="padding-left: 30px">4</td>
+                <td>
+                  <a href="" class="table_xr">Tashkilotlar</a>
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{company.bill}}
+                </td>
+                {% for out in out_company|slice:'1' %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  <a href=""> {{out.income}}</a>
+                </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td style="padding-left: 30px">5</td>
+                <td><a href="" class="table_xr">Kredit</a></td>
+                <td class="formatUsd" style="color: #1d98ffff">
+                  {{cardit.bill}}
+                </td>
+                {% for out in out_credit|slice:'1' %}
+                <td class="formatUsd">
+                  <a href="" style="color: #1d98ffff"> {{out.income}}</a>
+                </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td style="padding-left: 30px">6</td>
+                <td><a href="" class="table_xr">Boshqalar</a></td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  <a href="">{{other_today}}</a>
+                </td>
 
-              <td id="bg_col" style="padding-left: 30px">
-                {% for other in others|slice:"2" %}
-                <span> {{other.description}} </span>, {% endfor %}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                <td style="padding-left: 30px">
+                  {% for other in others|slice:"2" %}
+                  <span> {{other.description}}</span>, {% endfor %}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-
     <br /><br />
     <!-- Gaz  -->
-    <div id="table_head">
-      <h5 class="text-center p-3">{{category_name}} sotib olgan gazlar</h5>
-      <div style="margin-bottom: 10xp" id="table_head" class="table-responsive">
-        <table class="table" id="table_scroll_2">
-          <thead>
-            <tr>
-              <th scope="col" style="padding-left: 30px" id="bg_col">Sana</th>
-              <th scope="col" id="bg_col">Xisoblagich</th>
-              <th scope="col" id="bg_col">Sotib olingan gaz</th>
-              <th scope="col" id="bg_col">Aksiz</th>
-              <th scope="col" id="bg_col">Olish narxi</th>
-              <th scope="col" id="bg_col">Aksiz(sum)</th>
-              <th scope="col" id="bg_col">Olingan gaz(sum)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for obj in object_list %}
-            <tr>
-              <td style="padding-left: 30px" id="bg_col">{{obj.date}}</td>
-              <td class="formatKub" id="bg_col">{{obj.mian_gas}}</td>
-              <td class="formatKub" id="bg_col">{{obj.last_gas}}</td>
-              <td class="formatNum" id="bg_col">{{obj.aksiz}}</td>
-              <td class="formatNum" id="bg_col">{{obj.buygasprice}}</td>
-              <td class="formatNum" id="bg_col">{{obj.aksiz_sum}}</td>
-              <td class="formatNum" id="bg_col">{{obj.buy_sum}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+    <div class="container">
+      <div class="shadow p-3 mb-5 bg-body rounded-3">
+        <h5 class="text-center p-3">{{category_name}} sotib olgan gazlar</h5>
+        <div style="margin-bottom: 10xp" class="table-responsive">
+          <table class="table" id="table_scroll_2">
+            <thead>
+              <tr>
+                <th scope="col" style="padding-left: 30px">Sana</th>
+                <th scope="col">Xisoblagich</th>
+                <th scope="col">Sotib olingan gaz</th>
+                <th scope="col">Aksiz</th>
+                <th scope="col">Olish narxi</th>
+                <th scope="col">Aksiz(sum)</th>
+                <th scope="col">Olingan gaz(sum)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for obj in object_list %}
+              <tr>
+                <td style="padding-left: 30px">{{obj.date}}</td>
+                <td class="formatKub" style="color: #1d98ffff">
+                  {{obj.mian_gas}}
+                </td>
+                <td class="formatKub" style="color: #1d98ffff">
+                  {{obj.last_gas}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.aksiz}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.buygasprice}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.aksiz_sum}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.buy_sum}}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <!-- Gaz end -->
     <br /><br />
-    <div id="table_head">
-      <h5 class="text-center p-3">{{category_name}} sotgan gazlar</h5>
-      <div style="margin-bottom: 10xp" id="table_head" class="table-responsive">
-        <table class="table table-primary" id="table_scroll_3">
-          <thead>
-            <tr>
-              <th scope="col" style="padding-left: 30px" id="bg_col">Sana</th>
-              <th scope="col" id="bg_col">Xisoblagich</th>
-              <th scope="col" id="bg_col">Sotilgan</th>
-              <th scope="col" id="bg_col">1.4% Yo'q</th>
-              <th scope="col" id="bg_col">Qolgan</th>
-              <th scope="col" id="bg_col">Sotish</th>
-              <th scope="col" id="bg_col">Naqt</th>
-              <th scope="col" id="bg_col">Plastik</th>
-              <th scope="col" id="bg_col">Tashkilot</th>
-              <th scope="col" id="bg_col">Tushum</th>
-              <th scope="col" id="bg_col">Ja'mi</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for obj in stations%}
-            <tr>
-              <td style="padding-left: 30px" id="bg_col">{{obj.date}}</td>
-              <td class="formatKub" id="bg_col">{{obj.counter}}</td>
-              <td class="formatKub" id="bg_col">{{obj.total_gas}}</td>
-              <td class="formatKub" id="bg_col">{{obj.lose_gas}}</td>
-              <td class="formatKub" id="bg_col">{{obj.gas}}</td>
-              <td class="formatNum" id="bg_col">{{obj.sale_price}}</td>
-              <td class="formatNum" id="bg_col">{{obj.chec}}</td>
-              <td class="formatNum" id="bg_col">{{obj.card}}</td>
-              <td class="formatNum" id="bg_col">{{obj.company}}</td>
-              <td class="formatNum" id="bg_col">{{obj.sum_half}}</td>
-              <td class="formatNum" id="bg_col">{{obj.total_sum}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+    <div class="container">
+      <div class="shadow p-3 mb-5 bg-body rounded-3">
+        <h5 class="text-center p-3">{{category_name}} sotgan gazlar</h5>
+        <div style="margin-bottom: 10xp" class="table-responsive">
+          <table class="table" id="table_scroll_3">
+            <thead>
+              <tr>
+                <th scope="col" style="padding-left: 30px">Sana</th>
+                <th scope="col">Xisoblagich</th>
+                <th scope="col">Sotilgan</th>
+                <th scope="col">1.4% Yo'q</th>
+                <th scope="col">Qolgan</th>
+                <th scope="col">Sotish</th>
+                <th scope="col">Naqt</th>
+                <th scope="col">Plastik</th>
+                <th scope="col">Tashkilot</th>
+                <th scope="col">Tushum</th>
+                <th scope="col">Ja'mi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for obj in stations%}
+              <tr>
+                <td style="padding-left: 30px">{{obj.date}}</td>
+                <td class="formatKub" style="color: #1d98ffff">
+                  {{obj.counter}}
+                </td>
+                <td class="formatKub" style="color: #1d98ffff">
+                  {{obj.total_gas}}
+                </td>
+                <td class="formatKub" style="color: #1d98ffff">
+                  {{obj.lose_gas}}
+                </td>
+                <td class="formatKub" style="color: #1d98ffff">{{obj.gas}}</td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.sale_price}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">{{obj.chec}}</td>
+                <td class="formatNum" style="color: #1d98ffff">{{obj.card}}</td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.company}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.sum_half}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.total_sum}}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-    <br />
+
+    <div class="container">
+      <div
+        class="card w-100 shadow p-3 mb-5 bg-body rounded-3"
+        style="background-color: lightskyblue"
+      >
+        <div class="card-body">
+          <h5 class="card-title text-center p-2">Sozlamalar:</h5>
+          <div class="row">
+            <div class="col p-2">
+              <center>
+                <a
+                  href="{% url 'main:add_to_maingas' %}"
+                  style="margin-top: 10px"
+                  class="btn btn-primary"
+                  >Gaz qo'shish</a
+                >
+              </center>
+            </div>
+            <div class="col p-2">
+              <center>
+                <a
+                  href="{% url 'main:add_to_incomes' %}"
+                  style="margin-top: 10px"
+                  class="btn btn-primary"
+                  >Xarajat qo'shish</a
+                >
+              </center>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Footer -->
     <footer class="text-center" style="background-color: rgba(0, 0, 0, 0.05)">
       <!-- Grid container -->
@@ -263,6 +348,16 @@
     });
     kubs.forEach((kub) => {
       kub.innerHTML = x.format(kub.outerText);
+    });
+  </script>
+  <script>
+    let usds = document.querySelectorAll(".formatUsd");
+    const y = new Intl.NumberFormat("sp-UZ", {
+      style: "currency",
+      currency: "usd",
+    });
+    usds.forEach((usd) => {
+      usd.innerHTML = y.format(usd.outerText);
     });
   </script>
   <script

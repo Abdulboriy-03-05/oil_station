@@ -12,12 +12,7 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
-#table_head {
-  background-color: lightskyblue;
-}
-#bg_col {
-  background-color: lightskyblue;
-}
+
 #table_head_word {
   margin-left: 200px;
 }
@@ -46,9 +41,6 @@
   }
   #table_scroll {
     width: 500px;
-  }
-  #table_scroll_2 {
-    width: 1000px;
   }
   #table_scroll_3 {
     width: 1500px;

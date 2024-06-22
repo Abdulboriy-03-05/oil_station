@@ -84,119 +84,113 @@
         </div>
       </div>
     </nav>
-    <div class="card w-100" style="background-color: lightskyblue">
-      <div class="card-body">
-        <h5 class="card-title text-center p-2">Asosiy xisob raqam:</h5>
-        <h5 class="card-title p-1 pt-3">
-          <span>Jami : </span> <span class="formatNum">{{total_monay}}</span>
-        </h5>
-        <div class="row">
-          <div class="col">
-            {% for cat in categories %}
-            <a
-              class="nav-link active p-2"
-              aria-current="page"
-              href="{{cat.get_url}}"
-              ><h6>{{ cat.name }} :</h6></a
-            >
-            {% endfor %}
+    <br />
+    <div class="container">
+      <div class="card w-100 shadow p-3 mb-5 bg-body rounded-3">
+        <div class="card-body">
+          <h5 class="card-title text-center p-2">Asosiy xisob raqam:</h5>
+          <h5 class="card-title p-1 pt-3">
+            <span>Jami : </span> <span class="formatNum">{{total_monay}}</span>
+          </h5>
+          <div class="row">
+            <div class="col">
+              {% for cat in categories %}
+              <a
+                class="nav-link active"
+                style="padding: 7px"
+                aria-current="page"
+                href="{{cat.get_url}}"
+                ><h6>{{ cat.name }} :</h6></a
+              >
+              {% endfor %}
+            </div>
+            <div class="col">
+              {% for total in totals %}
+              <p
+                class="formatNum"
+                style="margin-top: 5px; padding: 1px; color: #1d98ffff"
+              >
+                {{total.bill}}
+              </p>
+              {% endfor %}
+            </div>
           </div>
-          <div class="col">
-            {% for total in totals %}
-            <p class="formatNum" style="padding: 2.5px">{{total.bill}}</p>
-            {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card w-100 shadow p-3 mb-5 bg-body rounded-3">
+        <div class="card-body">
+          <h5 class="card-title text-center p-2">
+            Kechagi kundagi sotib olingan gazlar:
+          </h5>
+          <h5 class="card-title p-1 pt-3">
+            <span>Jami : </span>
+            <span class="formatKub">{{total_buy_gas}}</span>
+          </h5>
+          <div class="row">
+            <div class="col">
+              {% for cat in categories %}
+              <a
+                class="nav-link active"
+                style="padding: 7px"
+                aria-current="page"
+                href="{{cat.get_url}}"
+                ><h6>{{ cat.name }} :</h6></a
+              >
+              {% endfor %}
+            </div>
+            <div class="col">
+              {% for total in total_buy_gases|slice:"3"%}
+              <p
+                class="formatKub"
+                style="margin-top: 5px; padding: 1px; color: #1d98ffff"
+              >
+                {{total.last_gas}}
+              </p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card w-100 shadow p-3 mb-5 bg-body rounded-3">
+        <div class="card-body">
+          <h5 class="card-title text-center p-2">
+            Kechagi kundagi sotilgan gazlar:
+          </h5>
+          <h5 class="card-title p-1 pt-3">
+            <span>Jami : </span>
+            <span class="formatKub">{{total_sale_gas}}</span>
+          </h5>
+          <div class="row">
+            <div class="col">
+              {% for cat in categories %}
+              <a
+                class="nav-link active"
+                style="padding: 7px"
+                aria-current="page"
+                href="{{cat.get_url}}"
+                ><h6>{{ cat.name }} :</h6></a
+              >
+              {% endfor %}
+            </div>
+            <div class="col">
+              {% for total in total_sale_gases|slice:"3"%}
+              <p
+                class="formatKub"
+                style="margin-top: 5px; padding: 1px; color: #1d98ffff"
+              >
+                {{total.gas}}
+              </p>
+              {% endfor %}
+            </div>
           </div>
         </div>
       </div>
     </div>
     <br />
-    <div class="card w-100" style="background-color: lightskyblue">
-      <div class="card-body">
-        <h5 class="card-title text-center p-2">
-          Kechagi kundagi sotib olingan gazlar:
-        </h5>
-        <h5 class="card-title p-1 pt-3">
-          <span>Jami : </span> <span class="formatKub">{{total_buy_gas}}</span>
-        </h5>
-        <div class="row">
-          <div class="col">
-            {% for cat in categories %}
-            <a
-              class="nav-link active p-2"
-              aria-current="page"
-              href="{{cat.get_url}}"
-              ><h6>{{ cat.name }} :</h6></a
-            >
-            {% endfor %}
-          </div>
-          <div class="col">
-            {% for total in total_buy_gases|slice:"3"%}
-            <p class="formatNum" style="padding: 2.5px">{{total.last_gas}}</p>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    </div>
-    <br />
-    <div class="card w-100" style="background-color: lightskyblue">
-      <div class="card-body">
-        <h5 class="card-title text-center p-2">
-          Kechagi kundagi sotilgan gazlar:
-        </h5>
-        <h5 class="card-title p-1 pt-3">
-          <span>Jami : </span> <span class="formatKub">{{total_sale_gas}}</span>
-        </h5>
-        <div class="row">
-          <div class="col">
-            {% for cat in categories %}
-            <a
-              class="nav-link active p-2"
-              aria-current="page"
-              href="{{cat.get_url}}"
-              ><h6>{{ cat.name }} :</h6></a
-            >
-            {% endfor %}
-          </div>
-          <div class="col">
-            {% for total in total_sale_gases|slice:"3"%}
-            <p class="formatNum" style="padding: 2.5px">{{total.gas}}</p>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    </div>
-    <br />
-    <div class="card w-100" style="background-color: lightskyblue">
-      <div class="card-body">
-        <h5 class="card-title text-center p-2">Sozlamalar:</h5>
-        <span class="p-2"
-          ><a
-            href="{% url 'main:add_to_maingas' %}"
-            style="margin-top: 10px"
-            class="btn btn-primary"
-            >Gaz qo'shish</a
-          ></span
-        >
-        <span class="p-2"
-          ><a
-            href="{% url 'main:add_to_incomes' %}"
-            style="margin-top: 10px"
-            class="btn btn-primary"
-            >Xarajat qo'shish</a
-          ></span
-        >
-        <!-- <span class="p-2"
-          ><a href="#" style="margin-top: 10px" class="btn btn-primary"
-            >Button</a
-          ></span
-        >
-        <span class="p-2"
-          ><a href="#" style="margin-top: 10px" class="btn btn-primary"
-            >Button</a
-          ></span
-        > -->
-      </div>
-    </div>
 
     <!-- Footer -->
     <footer class="text-center" style="background-color: rgba(0, 0, 0, 0.05)">

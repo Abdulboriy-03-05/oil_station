@@ -19,7 +19,7 @@
     />
     <link rel="stylesheet" href="/static/css/index.css" />
   </head>
-  <body style="width: 100%;">
+  <body style="width: 100%">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
@@ -65,264 +65,122 @@
       </div>
     </nav>
     <!-- Navbar end -->
-
+    <br />
+    <div class="container">
+      <div class="card w-100 shadow p-3 mb-5 bg-body rounded-3">
+        <div class="card-body">
+          <h5 class="card-title text-center p-2">Kechagi kungi xisobot:</h5>
+          <div class="row">
+            <div class="col">
+              <h6 style="padding: 7px">Sotilgaz gaz :</h6>
+              <h6 style="padding: 7px">Jami :</h6>
+              <h6 style="padding: 7px">Naqt :</h6>
+              <h6 style="padding: 7px">Plastik :</h6>
+              <h6 style="padding: 7px">Tashkilot :</h6>
+              <h6 style="padding: 7px">Topshirilsh :</h6>
+            </div>
+            <div class="col">
+              {% for obj_yes in object_yesterdays|slice:"1" %}
+              <p
+                class="formatKub"
+                style="margin-top: 5.7px; padding: 1px; color: #1d98ffff"
+              >
+                {{obj_yes.gas}}
+              </p>
+              <p
+                class="formatNum"
+                style="margin-top: -2px; padding: 1px; color: #1d98ffff"
+              >
+                {{obj_yes.total_sum}}
+              </p>
+              <p
+                class="formatNum"
+                style="margin-top: 3px; padding: 1px; color: #1d98ffff"
+              >
+                {{obj_yes.chec}}
+              </p>
+              <p
+                class="formatNum"
+                style="margin-top: -1.7px; padding: 1px; color: #1d98ffff"
+              >
+                {{obj_yes.card}}
+              </p>
+              <p
+                class="formatNum"
+                style="margin-top: -1.8px; padding: 1px; color: #1d98ffff"
+              >
+                {{obj_yes.company}}
+              </p>
+              <p
+                class="formatNum"
+                style="margin-top: -1.8px; padding: 1px; color: #1d98ffff"
+              >
+                {{obj_yes.sum_half}}
+              </p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Gaz  -->
-  <div id="table_head">
-    <div class="row w-100" style="background-color: lightskyblue; width:100%;">
-      <div class="col-10">
-        <h5 class="text-center p-3" id="table_head_word">
-          Oxirgi sotilgan gazlar
-        </h5>
-      </div>
-      <div class="col-2 mt-3 text-start">
-        <a href="{% url 'main:station_add_gas' %}">
-          <img
-          id="img_of_add"
-          src="/static/img/Plus-Symbol-Vector-PNG-Clipart.png"
-          alt=""
-          />
-        </a>
+    <div class="container">
+      <div class="shadow p-3 mb-5 bg-body rounded-3">
+        <div class="row w-100">
+          <div class="col-10">
+            <h5 class="text-center p-3" id="table_head_word">Umumiy xisobot</h5>
+          </div>
+          <div class="col-2 mt-3 text-start">
+            <a href="{% url 'main:station_add_gas' %}">
+              <img
+                id="img_of_add"
+                src="/static/img/Plus-Symbol-Vector-PNG-Clipart.png"
+                alt=""
+              />
+            </a>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table" id="table_scroll_2">
+            <thead>
+              <tr>
+                <th scope="col" style="padding-left: 30px">Sana</th>
+                <th scope="col">Xisoblagich</th>
+                <th scope="col">Sotilgan</th>
+                <th scope="col">1.4% Yo'q</th>
+                <th scope="col">Gaz ta'ni</th>
+                <th scope="col">Sotish</th>
+                <th scope="col">Naqt</th>
+                <th scope="col">Plastik</th>
+                <th scope="col">Tashkilot</th>
+                <th scope="col">Tushum</th>
+                <th scope="col">Ja'mi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for obj in object %}
+              <tr>
+                <td style="padding-left: 30px; width: 170px">{{obj.date}}</td>
+                <td class="formatKub">{{obj.counter}}</td>
+                <td class="formatKub">{{obj.total_gas}}</td>
+                <td class="formatKub">{{obj.lose_gas}}</td>
+                <td class="formatKub">{{obj.gas}}</td>
+                <td class="formatNum">{{obj.sale_price}}</td>
+                <td class="formatNum">{{obj.chec}}</td>
+                <td class="formatNum">{{obj.card}}</td>
+                <td class="formatNum">{{obj.company}}</td>
+                <td class="formatNum">{{obj.sum_half}}</td>
+                <td class="formatNum">{{obj.total_sum}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="p-3"></div>
       </div>
     </div>
-    <div class="table-responsive" id="table_head">
-        <table class="table table-primary" id="table_scroll_2">
-        <thead>
-          <tr>
-            <th scope="col" id="bg_col" style="padding-left: 30px;">Xisoblagich</th>
-            <th scope="col" id="bg_col">Sotilgan</th>
-            <th scope="col" id="bg_col">1.4% Yo'q</th>
-            <th scope="col" id="bg_col">Qolgan</th>
-            <th scope="col" id="bg_col">Sotish</th>
-            <th scope="col" id="bg_col">Naqt</th>
-            <th scope="col" id="bg_col">Plastik</th>
-            <th scope="col" id="bg_col">Tashkilot</th>
-            <th scope="col" id="bg_col">Tushum</th>
-            <th scope="col" id="bg_col">Ja'mi</th>
-            <th scope="col" id="bg_col">Sana</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for obj in object %}
-          <tr>
-            <td id="bg_col" style="padding-left: 30px;" class="formatKub">{{obj.counter}}</td>
-            <td id="bg_col" class="formatKub">{{obj.total_gas}}</td>
-            <td class="formatKub" id="bg_col">{{obj.lose_gas}}</td>
-            <td class="formatKub"id="bg_col">{{obj.gas}}</td>
-            <td class="formatNum" id="bg_col">{{obj.sale_price}}</td>
-            <td class="formatNum" id="bg_col">{{obj.chec}}</td>
-            <td class="formatNum" id="bg_col">{{obj.card}}</td>
-            <td class="formatNum" id="bg_col">{{obj.company}}</td>
-            <td class="formatNum" id="bg_col">{{obj.sum_half}}</td>
-            <td class="formatNum" id="bg_col">{{obj.total_sum}}</td>
-            <td id="bg_col">{{obj.date}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    <div class="p-3">
-    </div>
-  </div>
-    <!-- Gaz end -->
 
-    <br /><br />
-    <!-- Benzin 80  -->
-    <!-- <div id="table_head" class="table-responsive">
-      <div class="row w-100">
-        <div class="col-10">
-          <h5 class="text-center p-3" id="table_head_word">
-            Oxirgi sotilgan 80 benzinlar
-          </h5>
-        </div>
-        <div class="col-2 mt-3 text-start">
-          <a href="#">
-            <img
-              id="img_of_add"
-              src="img/Plus-Symbol-Vector-PNG-Clipart.png"
-              alt=""
-            />
-          </a>
-        </div>
-      </div>
-      <table class="table table-primary" id="table_scroll">
-        <thead>
-          <tr>
-            <th scope="col" id="number_of_table">#</th>
-            <th scope="col">Litr</th>
-            <th scope="col">Olin</th>
-            <th scope="col">Sot</th>
-            <th scope="col">Naqt</th>
-            <th scope="col">Plas</th>
-            <th scope="col">Umumiy</th>
-            <th scope="col">Sana</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row" id="number_of_table">1</th>
-            <td><a href="" class="table_xr">100</a></td>
-            <td>7 100</td>
-            <td>7 800</td>
-            <td>500 000</td>
-            <td>280 000</td>
-            <td>780 000</td>
-            <td>25.05.2024</td>
-          </tr>
-          <tr>
-            <th scope="row" id="number_of_table">2</th>
-            <td><a href="" class="table_xr">100</a></td>
-            <td>7 100</td>
-            <td>7 800</td>
-            <td>500 000</td>
-            <td>280 000</td>
-            <td>780 000</td>
-            <td>24.05.2024</td>
-          </tr>
-          <tr>
-            <th scope="row" id="number_of_table">3</th>
-            <td><a href="" class="table_xr">100</a></td>
-            <td>7 100</td>
-            <td>7 800</td>
-            <td>500 000</td>
-            <td>280 000</td>
-            <td>780 000</td>
-            <td>23.05.2024</td>
-          </tr>
-          <tr>
-            <th scope="row" id="number_of_table">4</th>
-            <td><a href="" class="table_xr">100</a></td>
-            <td>7 100</td>
-            <td>7 800</td>
-            <td>500 000</td>
-            <td>280 000</td>
-            <td>780 000</td>
-            <td>22.05.2024</td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
-    <!-- Benzin end -->
-    <!-- <br /><br /> -->
-    <!-- Benzin 92  -->
-    <!-- <div id="table_head" class="table-responsive">
-      <div class="row w-100">
-        <div class="col-10">
-          <h5 class="text-center p-3" id="table_head_word">
-            Oxirgi sotilgan 92 benzinlar
-          </h5>
-        </div>
-        <div class="col-2 mt-3 text-start">
-          <a href="#">
-            <img
-              id="img_of_add"
-              src="img/Plus-Symbol-Vector-PNG-Clipart.png"
-              alt=""
-            />
-          </a>
-        </div>
-      </div>
-      <table class="table table-primary" id="table_scroll">
-        <thead>
-          <tr>
-            <th scope="col" id="number_of_table">#</th>
-            <th scope="col">Litr</th>
-            <th scope="col">Olin</th>
-            <th scope="col">Sot</th>
-            <th scope="col">Naqt</th>
-            <th scope="col">Plas</th>
-            <th scope="col">Umumiy</th>
-            <th scope="col">Sana</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row" id="number_of_table">1</th>
-            <td><a href="" class="table_xr">100</a></td>
-            <td>9 200</td>
-            <td>10 000</td>
-            <td>700 000</td>
-            <td>300 000</td>
-            <td>1 000 000</td>
-            <td>25.05.2024</td>
-          </tr>
-          <tr>
-            <th scope="row" id="number_of_table">2</th>
-            <td><a href="" class="table_xr">100</a></td>
-            <td>9 200</td>
-            <td>10 000</td>
-            <td>700 000</td>
-            <td>300 000</td>
-            <td>1 000 000</td>
-            <td>24.05.2024</td>
-          </tr>
-          <tr>
-            <th scope="row" id="number_of_table">3</th>
-            <td><a href="" class="table_xr">100</a></td>
-            <td>9 200</td>
-            <td>10 000</td>
-            <td>700 000</td>
-            <td>300 000</td>
-            <td>1 000 000</td>
-            <td>23.05.2024</td>
-          </tr>
-          <tr>
-            <th scope="row" id="number_of_table">4</th>
-            <td><a href="" class="table_xr">100</a></td>
-            <td>9 200</td>
-            <td>10 000</td>
-            <td>700 000</td>
-            <td>300 000</td>
-            <td>1 000 000</td>
-            <td>22.05.2024</td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
-    <!-- Benzin end -->
-    <!-- Footer -->
-    <!-- <footer class="text-center" style="background-color: rgba(0, 0, 0, 0.05)"> -->
-      <!-- Grid container -->
-      <!-- <div class="container p-4 pb-0"> -->
-        <!-- Section: Social media -->
-        <!-- <section class="mb-4"> -->
-          <!-- Facebook -->
-          <!-- <a
-            data-mdb-ripple-init
-            class="btn text-dark btn-floating"
-            href="#!"
-            role="button"
-            >Asosiy</a
-          > -->
-
-          <!-- Twitter -->
-          <!-- <a
-            data-mdb-ripple-init
-            class="btn text-dark btn-floating"
-            href="#!"
-            role="button"
-            >Gaz</a
-          > -->
-
-          <!-- Google -->
-          <!-- <a
-            data-mdb-ripple-init
-            class="btn text-dark btn-floating"
-            href="#!"
-            role="button"
-            >Ben 80</a
-          >
-          <a
-            data-mdb-ripple-init
-            class="btn text-dark btn-floating"
-            href="#!"
-            role="button"
-            >Ben 92</a
-          >
-        </section> -->
-        <!-- Section: Social media -->
-      </div>
-      <!-- Grid container -->
-
+    <footer>
       <!-- Copyright -->
       <div class="text-center p-3 pt-0">
         © 2024 Copyright:
@@ -330,7 +188,6 @@
       </div>
       <!-- Copyright -->
     </footer>
-    <!-- Footer end -->
     <script>
       let nums = document.querySelectorAll(".formatNum");
       const f = new Intl.NumberFormat("sp-UZ", {

@@ -45,9 +45,12 @@ def home(request):
     if request.user.is_authenticated:
         user = request.user
         manage = Manag_totals.objects.filter(user=user)
+        yesterday = datetime.now() - timedelta(days=1)
+        manage_yester = Manag_totals.objects.filter(user=user,date=yesterday)
 
         context = {
-            "object":manage
+            "object":manage,
+            "object_yesterdays":manage_yester,
         }
         return render(request, 'director.html',context,)
     else:
