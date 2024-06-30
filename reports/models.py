@@ -18,13 +18,13 @@ class Filial(models.Model):
     
 
 class Saleprice(models.Model):
-    saleprice = models.IntegerField('Gazdi olingan narxi',default=0,null=True,blank=True)
+    saleprice = models.IntegerField('Gazni olingan narxi',default=0,null=True,blank=True)
     date = models.DateField("Vaqt", auto_now_add=True,)
 
     class Meta:
         ordering = ["-id"]
-        verbose_name = " Gazdi sotuv narxi"
-        verbose_name_plural = "Gazdi sotuv narxi"
+        verbose_name = " Gazni sotuv narxi"
+        verbose_name_plural = "Gazni sotuv narxi"
     def __str__(self):
         return f"{self.saleprice}"
 
@@ -36,8 +36,8 @@ class Buyprice(models.Model):
 
     class Meta:
         ordering = ["-id"]
-        verbose_name = " Gazdi olingan narxi"
-        verbose_name_plural = "Gazdi olingan narxi"
+        verbose_name = " Gazni olingan narxi"
+        verbose_name_plural = "Gazni olingan narxi"
     
     def __str__(self):
         return f"{self.buyprice}"
@@ -50,8 +50,8 @@ class Losegas(models.Model):
 
     class Meta:
         ordering = ["-id"]
-        verbose_name = " Gazdi 1.4% Yo'qotish"
-        verbose_name_plural = " Gazdi 1.4% Yo'qotish"
+        verbose_name = " Gazni 1.4% Yo'qotish"
+        verbose_name_plural = " Gazni 1.4% Yo'qotish"
     
     def __str__(self):
         return f"{self.losegas}"
@@ -63,11 +63,24 @@ class Aksiz(models.Model):
 
     class Meta:
         ordering = ["-id"]
-        verbose_name = " Aksiz so'lig'"
-        verbose_name_plural = " Aksiz so'lig'"
+        verbose_name = " Aksiz solig'"
+        verbose_name_plural = " Aksiz solig'"
     
     def __str__(self):
         return f"{self.aksiz}"
+
+
+class Elector(models.Model):
+    elector = models.IntegerField('Elektor solig\'',default=0,null=True,blank=True)
+    date = models.DateField("Vaqt", auto_now_add=True,)
+
+    class Meta:
+        ordering = ["-id"]
+        verbose_name = " Elektor solig'"
+        verbose_name_plural = " Elektor solig'"
+    
+    def __str__(self):
+        return f"{self.elector}"
 
 
 class Send(models.Model):
@@ -87,7 +100,6 @@ class Send(models.Model):
 class Addmaingas(models.Model):
     author = models.ForeignKey(User, verbose_name='User', on_delete=models.DO_NOTHING, default=None, null=True)
     category = models.ForeignKey(Filial,verbose_name="Filial",on_delete=models.DO_NOTHING, default=None, null=True,related_name="filials")
-    mian_gas = models.IntegerField("Gaz xisoblagich", default=0,null=True,blank=True)
     last_gas = models.IntegerField("Sotib olingan gaz(kub)", default=0,null=True,blank=True)
     buygasprice = models.IntegerField("Gaz olinga narx", default=0,null=True,blank=True)
     aksiz = models.IntegerField("Aksiz solig' narx", default=0,null=True,blank=True)
@@ -220,8 +232,6 @@ class Aksiz_XR_income(models.Model):
 
 
 
-
-
 class Aksiz_XR_outcome(models.Model):
     category = models.ForeignKey(Filial,verbose_name="Aksiz_outcome", on_delete=models.DO_NOTHING, default=None,null=True,related_name="aksiz_outcome")
     outcome = models.IntegerField("Aksiz outcome",default=0,null=True,blank=True)
@@ -235,6 +245,52 @@ class Aksiz_XR_outcome(models.Model):
     def __str__(self):
         return f"{self.category}"
     
+
+
+class Elector_XR(models.Model):
+    category = models.ForeignKey(Filial,verbose_name="Elektrosvet", on_delete=models.DO_NOTHING, default=None,null=True,related_name="elctor")
+    bill = models.PositiveIntegerField("Elektro svet xisob", default=0, null=True,blank=True)
+    date = models.DateField("Vaqt", auto_now_add=True)
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = "Elektro svet"
+        verbose_name_plural = "Elektro svet"
+
+    def __str__(self):
+        return f"{self.category}"
+
+
+
+class Elector_XR_income(models.Model):
+    category = models.ForeignKey(Filial,verbose_name="Elektor_income", on_delete=models.DO_NOTHING, default=None,null=True,related_name="elctor_income")
+    income = models.IntegerField("Elektor income",default=0,null=True,blank=True)
+    date = models.DateField("Vaqt", auto_now_add=True,)
+
+
+    class Meta:
+        ordering = ["-id"]
+        verbose_name = "Elektor svet income X/R"
+        verbose_name_plural = "Elektor svet income X/R"
+    
+    def __str__(self):
+        return f"{self.category}"
+    
+
+
+class Elector_XR_outcome(models.Model):
+    category = models.ForeignKey(Filial,verbose_name="Elektor_outcome", on_delete=models.DO_NOTHING, default=None,null=True,related_name="elctor_outcome")
+    outcome = models.IntegerField("Elektor outcome",default=0,null=True,blank=True)
+    date = models.DateField("Vaqt", auto_now_add=True,)
+
+
+    class Meta:
+        ordering = ["-id"]
+        verbose_name = "Elektor svet outcomeX/R"
+        verbose_name_plural = "Elektor svet outcome X/R"
+    
+    def __str__(self):
+        return f"{self.category}"
 
 
 
@@ -363,36 +419,21 @@ class Manag_add_gas(models.Model):
     remain_gas = models.PositiveIntegerField('Sotilgan gaz', default=0,null=True,blank=True)
     lose_gas = models.PositiveIntegerField("1.4 % yo'qotish",default=0,null=True,blank=True)
     gas = models.PositiveIntegerField("Gazni ta'ni",default=0,null=True,blank=True)
-    date = models.DateField("Vaqt", auto_now_add=True,)
+    total_sum = models.PositiveIntegerField('Sotilgan gaz puli',default=0, null=True,blank=True)
+    date = models.DateField("Vaqt",)
 
 
     class Meta:
         ordering = ["-id"]
         verbose_name = "Zapravka sotgan gazi"
+        verbose_name_plural = "Zapravka sotgan gazi"
 
 
     def __str__(self):
         return f"{self.category}"
     
 
-class Manag_add_card(models.Model):
-    user = models.ForeignKey(User, verbose_name='User', on_delete=models.DO_NOTHING, default=None, null=True)
-    category = models.ForeignKey(Filial, verbose_name="Card_Filiali", on_delete=models.DO_NOTHING, default=None, null=True, related_name='car_filial')
-    counter = models.PositiveIntegerField('Xisoblagich',default=0, null=True, blank=True)
-    total_gas_card = models.PositiveIntegerField('Sotilga gas',default=0, null=True, blank=True)
-    lose_gas = models.PositiveIntegerField("1.4 % yo'qotish",default=0,null=True,blank=True)
-    gas = models.PositiveIntegerField("Gazni ta'ni",default=0,null=True,blank=True)
-    total_sum = models.PositiveIntegerField('Sotilgan gaz puli',default=0, null=True,blank=True)
-    date = models.DateField("Vaqt", auto_now_add=True,)
-    
 
-    class Meta:
-        ordering = ['-id']
-        verbose_name = "Sotilgan gaz puli"
-
-
-    def __str__(self):
-        return f"{self.category}"
     
 
 class Manag_totals(models.Model):
@@ -413,6 +454,7 @@ class Manag_totals(models.Model):
     class Meta:
         ordering = ['-id']
         verbose_name = "Zapravka xisoboti"
+        verbose_name_plural = "Zapravka xisoboti"
 
 
     def __str__(self):

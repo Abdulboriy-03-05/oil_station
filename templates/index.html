@@ -92,27 +92,29 @@
           <h5 class="card-title p-1 pt-3">
             <span>Jami : </span> <span class="formatNum">{{total_monay}}</span>
           </h5>
-          <div class="row">
-            <div class="col">
-              {% for cat in categories %}
-              <a
-                class="nav-link active"
-                style="padding: 7px"
-                aria-current="page"
-                href="{{cat.get_url}}"
-                ><h6>{{ cat.name }} :</h6></a
-              >
-              {% endfor %}
-            </div>
-            <div class="col">
-              {% for total in totals %}
-              <p
-                class="formatNum"
-                style="margin-top: 5px; padding: 1px; color: #1d98ffff"
-              >
-                {{total.bill}}
-              </p>
-              {% endfor %}
+          <div style="width: 100%">
+            <div class="row scroll_div">
+              <div class="col">
+                {% for cat in categories %}
+                <a
+                  class="nav-link active"
+                  style="padding: 7px"
+                  aria-current="page"
+                  href="{{cat.get_url}}"
+                  ><h6>{{ cat.name }} :</h6></a
+                >
+                {% endfor %}
+              </div>
+              <div class="col">
+                {% for total in totals %}
+                <p
+                  class="formatNum"
+                  style="margin-top: 5px; padding: 1px; color: #1d98ffff"
+                >
+                  {{total.bill}}
+                </p>
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
@@ -129,26 +131,36 @@
             <span class="formatKub">{{total_buy_gas}}</span>
           </h5>
           <div class="row">
-            <div class="col">
+            <div class="col-6">
               {% for cat in categories %}
               <a
                 class="nav-link active"
-                style="padding: 7px"
+                style="padding: 7px; margin-top: 4px"
                 aria-current="page"
                 href="{{cat.get_url}}"
                 ><h6>{{ cat.name }} :</h6></a
               >
               {% endfor %}
             </div>
-            <div class="col">
-              {% for total in total_buy_gases|slice:"3"%}
+            <div class="col-6">
               <p
                 class="formatKub"
                 style="margin-top: 5px; padding: 1px; color: #1d98ffff"
               >
-                {{total.last_gas}}
+                {{main_nasirullo}}
               </p>
-              {% endfor %}
+              <p
+                class="formatKub"
+                style="margin-top: 3px; padding: 1px; color: #1d98ffff"
+              >
+                {{main_sanoat}}
+              </p>
+              <p
+                class="formatKub"
+                style="margin-top: 7px; padding: 1px; color: #1d98ffff"
+              >
+                {{main_parfum}}
+              </p>
             </div>
           </div>
         </div>
@@ -177,14 +189,24 @@
               {% endfor %}
             </div>
             <div class="col">
-              {% for total in total_sale_gases|slice:"3"%}
               <p
                 class="formatKub"
                 style="margin-top: 5px; padding: 1px; color: #1d98ffff"
               >
-                {{total.gas}}
+                {{gas_nasirullo}}
               </p>
-              {% endfor %}
+              <p
+                class="formatKub"
+                style="margin-top: 3px; padding: 1px; color: #1d98ffff"
+              >
+                {{gas_sanoat}}
+              </p>
+              <p
+                class="formatKub"
+                style="margin-top: 7px; padding: 1px; color: #1d98ffff"
+              >
+                {{gas_parfum}}
+              </p>
             </div>
           </div>
         </div>

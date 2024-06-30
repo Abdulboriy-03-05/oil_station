@@ -30,6 +30,10 @@ class LosegasAdmin(admin.ModelAdmin):
 class Aksiz_XRAdmin(admin.ModelAdmin):
     list_diplay = ['aksiz']
 
+@admin.register(Elector)
+class ElectorAdmin(admin.ModelAdmin):
+    list_diplay = ['aksiz']
+
 @admin.register(Send)
 class SendAdmin(admin.ModelAdmin):
     list_diplay = ['send_tax']
@@ -47,6 +51,11 @@ class Xududgaz_XRAdmin(admin.ModelAdmin):
 @admin.register(Aksiz_XR)
 class Aksiz_XRAdmin(admin.ModelAdmin):
     list_diplay = ["bill"]
+
+@admin.register(Elector_XR)
+class Elector_XRAdmin(admin.ModelAdmin):
+    list_diplay = ["bill"]
+
 
 @admin.register(Company_XR)
 class Company_XRAdmin(admin.ModelAdmin):
@@ -85,6 +94,16 @@ class Aksiz_XR_outcomeAdmin(admin.ModelAdmin):
     list_diplay = ["outcome"]
 
 
+@admin.register(Elector_XR_income)
+class Aksiz_XR_incomeAdmin(admin.ModelAdmin):
+    list_diplay = ["income"]
+
+@admin.register(Elector_XR_outcome)
+class Elector_XR_outcomeAdmin(admin.ModelAdmin):
+    list_diplay = ["outcome"]
+
+
+
 @admin.register(Company_XR_income)
 class Company_XR_incomeAdmin(admin.ModelAdmin):
     list_diplay = ["income"]
@@ -113,9 +132,6 @@ class Income_XRSAdmin(admin.ModelAdmin):
 class Manag_add_gasAdmin(admin.ModelAdmin):
     list_diplay = ["category"]
 
-@admin.register(Manag_add_card)
-class Manag_add_cardAdmin(admin.ModelAdmin):
-    list_diplay = ["category"]
 
 @admin.register(Manag_totals)
 class Manag_totalsAdmin(admin.ModelAdmin):

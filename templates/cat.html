@@ -123,6 +123,18 @@
               </tr>
               <tr>
                 <td style="padding-left: 30px">4</td>
+                <td><a href="" class="table_xr">Elektor</a></td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{elector.bill}}
+                </td>
+                {% for out in out_elec|slice:'1' %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  <a href="">{{out.outcome}}</a>
+                </td>
+                {% endfor %}
+              </tr>
+              <tr>
+                <td style="padding-left: 30px">5</td>
                 <td>
                   <a href="" class="table_xr">Tashkilotlar</a>
                 </td>
@@ -136,7 +148,7 @@
                 {% endfor %}
               </tr>
               <tr>
-                <td style="padding-left: 30px">5</td>
+                <td style="padding-left: 30px">6</td>
                 <td><a href="" class="table_xr">Kredit</a></td>
                 <td class="formatUsd" style="color: #1d98ffff">
                   {{cardit.bill}}
@@ -174,7 +186,6 @@
             <thead>
               <tr>
                 <th scope="col" style="padding-left: 30px">Sana</th>
-                <th scope="col">Xisoblagich</th>
                 <th scope="col">Sotib olingan gaz</th>
                 <th scope="col">Aksiz</th>
                 <th scope="col">Olish narxi</th>
@@ -183,12 +194,9 @@
               </tr>
             </thead>
             <tbody>
-              {% for obj in object_list %}
+              {% for obj in object_list|slice:"4" %}
               <tr>
                 <td style="padding-left: 30px">{{obj.date}}</td>
-                <td class="formatKub" style="color: #1d98ffff">
-                  {{obj.mian_gas}}
-                </td>
                 <td class="formatKub" style="color: #1d98ffff">
                   {{obj.last_gas}}
                 </td>
@@ -208,6 +216,14 @@
               {% endfor %}
             </tbody>
           </table>
+        </div>
+        <div class="d-grid gap-1 d-md-flex justify-content-end">
+          <a
+            href="#"
+            style="margin-top: 15px"
+            class="btn btn-outline-primary btn-sm"
+            >more ...</a
+          >
         </div>
       </div>
     </div>
@@ -234,7 +250,7 @@
               </tr>
             </thead>
             <tbody>
-              {% for obj in stations%}
+              {% for obj in stations|slice:"4" %}
               <tr>
                 <td style="padding-left: 30px">{{obj.date}}</td>
                 <td class="formatKub" style="color: #1d98ffff">
@@ -265,6 +281,14 @@
               {% endfor %}
             </tbody>
           </table>
+        </div>
+        <div class="d-grid gap-1 d-md-flex justify-content-end">
+          <a
+            href="#"
+            style="margin-top: 15px"
+            class="btn btn-outline-primary btn-sm"
+            >more ...</a
+          >
         </div>
       </div>
     </div>

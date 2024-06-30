@@ -6,9 +6,9 @@ class AddMainGasForm(forms.ModelForm):
     
     class Meta:
         model = Addmaingas
-        fields = ("mian_gas","category")
+        fields = ("last_gas","category")
         widgets = {
-            "mian_gas":TextInput(attrs={'class':'input',"id":"input_add_gas"}),
+            "last_gas":TextInput(attrs={'class':'input',"id":"input_add_gas"}),
             "category":Select(attrs={'class': 'input',"id":"input_add_gas"})
         }
 
@@ -34,7 +34,7 @@ class Stationsalegas_6(forms.ModelForm):
     class Meta:
         model = Manag_add_gas
         fields = "__all__"
-        exclude = ['user','category','total_gas','kalonka_8','kalonka_7','remain_gas', "lose_gas","gas" ]
+        exclude = ['user','category','total_gas','kalonka_8','kalonka_7','remain_gas', "lose_gas","gas" ,"date","total_sum"]
         widgets = {
             "kalonka_1":TextInput(attrs={'class':'input',"id":"input_add_gas"}),
             "kalonka_2":TextInput(attrs={'class':'input',"id":"input_add_gas"}),
@@ -53,7 +53,7 @@ class Stationsalegas_8(forms.ModelForm):
     class Meta:
         model = Manag_add_gas
         fields = "__all__"
-        exclude = ['user','category','total_gas','remain_gas',"lose_gas","gas"]
+        exclude = ['user','category','total_gas','remain_gas',"lose_gas","gas","date","total_sum"]
         widgets = {
             "kalonka_1":TextInput(attrs={'class':'input',"id":"input_add_gas"}),
             "kalonka_2":TextInput(attrs={'class':'input',"id":"input_add_gas"}),

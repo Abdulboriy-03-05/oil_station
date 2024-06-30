@@ -66,63 +66,6 @@
     </nav>
     <!-- Navbar end -->
     <br />
-    <div class="container">
-      <div class="card w-100 shadow p-3 mb-5 bg-body rounded-3">
-        <div class="card-body">
-          <h5 class="card-title text-center p-2">Kechagi kungi xisobot:</h5>
-          <div class="row">
-            <div class="col">
-              <h6 style="padding: 7px">Sotilgaz gaz :</h6>
-              <h6 style="padding: 7px">Jami :</h6>
-              <h6 style="padding: 7px">Naqt :</h6>
-              <h6 style="padding: 7px">Plastik :</h6>
-              <h6 style="padding: 7px">Tashkilot :</h6>
-              <h6 style="padding: 7px">Topshirilsh :</h6>
-            </div>
-            <div class="col">
-              {% for obj_yes in object_yesterdays|slice:"1" %}
-              <p
-                class="formatKub"
-                style="margin-top: 5.7px; padding: 1px; color: #1d98ffff"
-              >
-                {{obj_yes.gas}}
-              </p>
-              <p
-                class="formatNum"
-                style="margin-top: -2px; padding: 1px; color: #1d98ffff"
-              >
-                {{obj_yes.total_sum}}
-              </p>
-              <p
-                class="formatNum"
-                style="margin-top: 3px; padding: 1px; color: #1d98ffff"
-              >
-                {{obj_yes.chec}}
-              </p>
-              <p
-                class="formatNum"
-                style="margin-top: -1.7px; padding: 1px; color: #1d98ffff"
-              >
-                {{obj_yes.card}}
-              </p>
-              <p
-                class="formatNum"
-                style="margin-top: -1.8px; padding: 1px; color: #1d98ffff"
-              >
-                {{obj_yes.company}}
-              </p>
-              <p
-                class="formatNum"
-                style="margin-top: -1.8px; padding: 1px; color: #1d98ffff"
-              >
-                {{obj_yes.sum_half}}
-              </p>
-              {% endfor %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- Gaz  -->
     <div class="container">
       <div class="shadow p-3 mb-5 bg-body rounded-3">
@@ -158,7 +101,7 @@
               </tr>
             </thead>
             <tbody>
-              {% for obj in object|slice:"4" %}
+              {% for obj in object %}
               <tr>
                 <td style="padding-left: 30px; width: 170px">{{obj.date}}</td>
                 <td class="formatKub">{{obj.counter}}</td>
