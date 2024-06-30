@@ -24,11 +24,11 @@ def home(request):
             cat = x.category
             
             if str(cat) in "Nasirullo xoji":
-                gas_nasirullo = x.last_gas
+                main_nasirullo = x.last_gas
             if str(cat) in "Sanoat tranzit":
-                gas_sanoat = x.last_gas
+                main_sanoat = x.last_gas
             if str(cat) in "Parfum distibyuter":
-                gas_parfum = x.last_gas
+                main_parfum = x.last_gas
 
 
 
