@@ -23,7 +23,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#"
+        <a class="navbar-brand" href="/"
           ><img
             src="/static/img/vecteezy_gas-pump-clipart-design-illustration_9400880.png"
             width="50"
@@ -66,66 +66,106 @@
     </nav>
     <!-- Navbar end -->
     <br />
+    <div class="container">
+      <div class="">
+        <div class="row">
+          <div class="col-6">
+            <div class="shadow mb-3 bg-body rounded-3">
+              <a href="" class="nav-link active">
+                <h6 class="text-center p-3">Nasirullo xoji</h6>
+              </a>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="shadow mb-3 bg-body rounded-3">
+              <a href="" class="nav-link active">
+                <h6 class="text-center p-3">Sanoat tranzit</h6>
+              </a>
+            </div>
+          </div>
+          <div class="col-6" style="margin-left: 25%">
+            <div class="shadow mb-3 bg-body rounded-3">
+              <h6 class="text-center p-3">Parfum distibyuter</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="shadow mb-3 bg-body rounded-3 mt-3">
+        <div class="row w-100">
+          <div class="">
+            <h5 class="text-center p-2">Umumiy bu oydagi xisobot:</h5>
+          </div>
+        </div>
+        <div class="row w-100">
+          <div class="">
+            <h5 class="text-center p-2">
+              <span>Tushum :</span>
+              <span style="color: #1d98ffff">12 121 221 SUM</span>
+            </h5>
+          </div>
+        </div>
+        <div class="row w-100">
+          <div class="">
+            <h5 class="text-center p-2">
+              <span>Chiqim :</span>
+              <span style="color: red">12 121 221 SUM</span>
+            </h5>
+          </div>
+        </div>
+        <div class="row w-100">
+          <div class="">
+            <h5 class="text-center p-2">
+              <span>Gaz :</span> <span>12 121 221 KUB</span>
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Gaz  -->
     <div class="container">
       <div class="shadow p-3 mb-5 bg-body rounded-3">
-        <div class="row w-100">
-          <div class="col-10">
-            <h5 class="text-center p-3" id="table_head_word">Umumiy xisobot</h5>
+        <div class="table-responsive overflow-scroll mt-3">
+          <div class="" style="height: 400px">
+            <table class="table" id="table_scroll_4">
+              <thead>
+                <tr>
+                  <th scope="col" style="padding-left: 30px">Sana</th>
+                  <th scope="col">Filial</th>
+                  <th scope="col">Sotib olingan gaz</th>
+                  <th scope="col">Aksiz</th>
+                  <th scope="col">Olish narxi</th>
+                  <th scope="col">Aksiz(sum)</th>
+                  <th scope="col">Olingan gaz(sum)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object %}
+                <tr>
+                  <td style="padding-left: 30px">{{obj.date}}</td>
+                  <td class="">{{obj.category}}</td>
+                  <td class="formatKub" style="color: #1d98ffff">
+                    {{obj.last_gas}}
+                  </td>
+                  <td class="formatNum" style="color: #1d98ffff">
+                    {{obj.aksiz}}
+                  </td>
+                  <td class="formatNum" style="color: #1d98ffff">
+                    {{obj.buygasprice}}
+                  </td>
+                  <td class="formatNum" style="color: #1d98ffff">
+                    {{obj.aksiz_sum}}
+                  </td>
+                  <td class="formatNum" style="color: #1d98ffff">
+                    {{obj.buy_sum}}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
-          <div class="col-2 mt-3 text-start">
-            <a href="{% url 'main:station_add_gas' %}">
-              <img
-                id="img_of_add"
-                src="/static/img/Plus-Symbol-Vector-PNG-Clipart.png"
-                alt=""
-              />
-            </a>
-          </div>
-        </div>
-        <div class="table-responsive">
-          <table class="table" id="table_scroll_2">
-            <thead>
-              <tr>
-                <th scope="col" style="padding-left: 30px">Sana</th>
-                <th scope="col">Xisoblagich</th>
-                <th scope="col">Sotilgan</th>
-                <th scope="col">1.4% Yo'q</th>
-                <th scope="col">Gaz ta'ni</th>
-                <th scope="col">Sotish</th>
-                <th scope="col">Naqt</th>
-                <th scope="col">Plastik</th>
-                <th scope="col">Tashkilot</th>
-                <th scope="col">Tushum</th>
-                <th scope="col">Ja'mi</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for obj in object %}
-              <tr>
-                <td style="padding-left: 30px; width: 170px">{{obj.date}}</td>
-                <td class="formatKub">{{obj.counter}}</td>
-                <td class="formatKub">{{obj.total_gas}}</td>
-                <td class="formatKub">{{obj.lose_gas}}</td>
-                <td class="formatKub">{{obj.gas}}</td>
-                <td class="formatNum">{{obj.sale_price}}</td>
-                <td class="formatNum">{{obj.chec}}</td>
-                <td class="formatNum">{{obj.card}}</td>
-                <td class="formatNum">{{obj.company}}</td>
-                <td class="formatNum">{{obj.sum_half}}</td>
-                <td class="formatNum">{{obj.total_sum}}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        <div class="d-grid gap-1 d-md-flex justify-content-end">
-          <a
-            href="#"
-            style="margin-top: 15px"
-            class="btn btn-outline-primary btn-sm"
-            >more ...</a
-          >
         </div>
       </div>
     </div>

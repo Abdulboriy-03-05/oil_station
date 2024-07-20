@@ -8,9 +8,23 @@ class AddMainGasForm(forms.ModelForm):
         model = Addmaingas
         fields = ("last_gas","category")
         widgets = {
-            "last_gas":TextInput(attrs={'class':'input',"id":"input_add_gas"}),
+            "last_gas":TextInput(attrs={'class':'number',"id":"input_add_gas"}),
             "category":Select(attrs={'class': 'input',"id":"input_add_gas"})
         }
+
+
+
+class Addbank(forms.ModelForm):
+    
+    class Meta:
+        model = Addmaingas
+        fields = ("naqt","uzcard","humo")
+        widgets = {
+            "naqt":forms.CheckboxInput(attrs={'class':'checkbox',}),
+            "uzcard":forms.CheckboxInput(attrs={'class':'checkbox',}),
+            "humo":forms.CheckboxInput(attrs={'class':'checkbox',}),
+        }
+
 
 
 class AddIncomeForm(forms.ModelForm):
@@ -72,8 +86,13 @@ class Stationaddgas(forms.ModelForm):
     
     class Meta:
         model = Manag_totals
-        fields = ("card","company")
+        fields = ("card_uz","card_humo","company")
         widgets = {
-            "card":TextInput(attrs={'class':'input',"id":"input_add_gas"}),
+            "card_uz":TextInput(attrs={'class':'input',"id":"input_add_gas"}),
+            "card_humo":TextInput(attrs={'class':'input',"id":"input_add_gas"}),
             "company":TextInput(attrs={'class':'input',"id":"input_add_gas"}),
         }
+
+
+
+

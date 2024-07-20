@@ -22,7 +22,17 @@ class SalepriceAdmin(admin.ModelAdmin):
 class BuypriceAdmin(admin.ModelAdmin):
     list_diplay = ['saleprice','date']
 
-@admin.register(Losegas)
+@admin.register(Nasrullo_lose)
+class LosegasAdmin(admin.ModelAdmin):
+    list_diplay = ['losegas','date']
+
+
+@admin.register(Sanoat_lose)
+class LosegasAdmin(admin.ModelAdmin):
+    list_diplay = ['losegas','date']
+
+
+@admin.register(Parfum_lose)
 class LosegasAdmin(admin.ModelAdmin):
     list_diplay = ['losegas','date']
 

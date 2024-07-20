@@ -17,6 +17,10 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
     <link rel="stylesheet" href="/static/css/index.css" />
   </head>
   <body>
@@ -73,9 +77,37 @@
         </div>
       </div>
     </nav>
+    <div class="container p-4">
+      <div class="row shadow p-3 mb-5 bg-body rounded-3">
+        <div class="col-md-5 mx-auto">
+          <div class="small fw-light">Sanani bo'yicha saralash</div>
+          <form action="#" method="get">
+            <div class="input-group">
+              <input
+                class="form-control border-end-0 border rounded-pill"
+                type="date"
+                value="{{date_date}}"
+                name="date"
+                id="example-search-input"
+              />
+              <span class="input-group-append">
+                <button
+                  class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5"
+                  type="submit"
+                >
+                  <i class="bi bi-search"></i>
+                </button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="shadow p-3 mb-5 bg-body rounded-3">
-        <h5 class="text-center p-3">{{category_name}} xisobotlar</h5>
+        <h5 class="text-center p-3">
+          {{date_date}} kungi {{category_name}} ning xisobotlari
+        </h5>
         <div class="table-responsive">
           <table class="table" id="table_scroll">
             <thead>
@@ -89,21 +121,48 @@
             <tbody>
               <tr>
                 <td style="padding-left: 30px">1</td>
-                <td><a href="" class="table_xr">Asosiy</a></td>
+                <td><a href="#" class="table_xr">Asosiy</a></td>
                 <td class="formatNum" style="color: #1d98ffff">
                   {{main_xr.bill}}
                 </td>
-                <td class="formatNum" style="color: #1d98ffff">
-                  <a href="">{{out_main}}</a>
+                <td>
+                  {% if category_name == 'Nasirullo-xoji' %}
+                  <a
+                    href="{% url 'main:nasirullo_outcome' %}"
+                    style="color: #1d98ffff; text-decoration: none"
+                    class="formatNum"
+                  >
+                    {{out_main}}
+                  </a>
+                  {% elif category_name == 'Sanoat-tranzit' %}
+                  <a
+                    href="{% url 'main:sanoat_outcome' %}"
+                    style="color: #1d98ffff; text-decoration: none"
+                    class="formatNum"
+                  >
+                    {{out_main}}
+                  </a>
+                  {% elif category_name == 'Parfum-distibyuter' %}
+                  <a
+                    href="{% url 'main:parfum_outcome' %}"
+                    style="color: #1d98ffff; text-decoration: none"
+                    class="formatNum"
+                  >
+                    {{out_main}}
+                  </a>
+                  {% endif %}
                 </td>
               </tr>
               <tr>
                 <td style="padding-left: 30px">2</td>
                 <td><a href="" class="table_xr">Xudud gaz</a></td>
+                {% if xudud_xr.bill > 0 %}
                 <td class="formatNum" style="color: #1d98ffff">
                   {{xudud_xr.bill}}
                 </td>
-                {% for out in out_xudud|slice:'1' %}
+                {% else %}
+                <td class="formatNum" style="color: red">{{xudud_xr.bill}}</td>
+                {% endif %} {% for out in out_xudud|slice:'1' %}
                 <td class="formatNum" style="color: #1d98ffff">
                   <a href="">{{out.outcome}}</a>
                 </td>
@@ -112,10 +171,13 @@
               <tr>
                 <td style="padding-left: 30px">3</td>
                 <td><a href="" class="table_xr">Aksiz</a></td>
+                {% if aksiz_xr.bill > 0 %}
                 <td class="formatNum" style="color: #1d98ffff">
                   {{aksiz_xr.bill}}
                 </td>
-                {% for out in out_aksiz|slice:'1' %}
+                {% else %}
+                <td class="formatNum" style="color: red">{{aksiz_xr.bill}}</td>
+                {% endif %} {% for out in out_aksiz|slice:'1' %}
                 <td class="formatNum" style="color: #1d98ffff">
                   <a href="">{{out.outcome}}</a>
                 </td>
@@ -124,10 +186,13 @@
               <tr>
                 <td style="padding-left: 30px">4</td>
                 <td><a href="" class="table_xr">Elektor</a></td>
+                {% if elector.bill > 0 %}
                 <td class="formatNum" style="color: #1d98ffff">
                   {{elector.bill}}
                 </td>
-                {% for out in out_elec|slice:'1' %}
+                {% else %}
+                <td class="formatNum" style="color: red">{{elector.bill}}</td>
+                {% endif %} {% for out in out_elec|slice:'1' %}
                 <td class="formatNum" style="color: #1d98ffff">
                   <a href="">{{out.outcome}}</a>
                 </td>
@@ -150,10 +215,13 @@
               <tr>
                 <td style="padding-left: 30px">6</td>
                 <td><a href="" class="table_xr">Kredit</a></td>
+                {% if cardit.bill > 0 %}
                 <td class="formatUsd" style="color: #1d98ffff">
                   {{cardit.bill}}
                 </td>
-                {% for out in out_credit|slice:'1' %}
+                {% else %}
+                <td class="formatUsd" style="color: red">{{cardit.bill}}</td>
+                {% endif %} {% for out in out_credit|slice:'1' %}
                 <td class="formatUsd">
                   <a href="" style="color: #1d98ffff"> {{out.income}}</a>
                 </td>
@@ -177,40 +245,110 @@
       </div>
     </div>
     <br /><br />
+
     <!-- Gaz  -->
     <div class="container">
       <div class="shadow p-3 mb-5 bg-body rounded-3">
-        <h5 class="text-center p-3">{{category_name}} sotib olgan gazlar</h5>
+        <h5 class="text-center p-3">
+          {{category_name}} sotib olgan va sotilgan gazlar
+        </h5>
         <div style="margin-bottom: 10xp" class="table-responsive">
           <table class="table" id="table_scroll_2">
-            <thead>
-              <tr>
-                <th scope="col" style="padding-left: 30px">Sana</th>
-                <th scope="col">Sotib olingan gaz</th>
-                <th scope="col">Aksiz</th>
-                <th scope="col">Olish narxi</th>
-                <th scope="col">Aksiz(sum)</th>
-                <th scope="col">Olingan gaz(sum)</th>
-              </tr>
-            </thead>
             <tbody>
-              {% for obj in object_list|slice:"4" %}
+              <thead>
+                <tr>
+                  <th scope="col" style="padding-left: 30px">Sana</th>
+                  <th scope="col">
+                    Xisoblagich dan <br />
+                    o'tgan gaz
+                  </th>
+                  <th scope="col">Aksiz(sum)</th>
+                  <th scope="col">Elektor(sum)</th>
+                  <th scope="col">Olingan gaz(sum)</th>
+                  <th scope="col">Sotilgan gaz(sum)</th>
+                  <th scope="col">Tashkilot</th>
+                  <th scope="col">Plastik</th>
+                  <th scope="col">Naqt</th>
+                  <th scope="col">Savdo puli</th>
+                  <th scope="col">Tushgan(sum)</th>
+                  <th scope="col">Tushmagan(sum)</th>
+                  <th scope="col">Foyda</th>
+                </tr>
+              </thead>
+              <br />
+              <thead>
+                <tr>
+                  <th scope="col" style="padding-left: 30px">Jami:</th>
+                  <td class="formatKub">{{total_gas}}</td>
+                  <td class="formatNum">{{total_aksiz}}</td>
+                  <td class="formatNum">{{total_elek}}</td>
+                  <td class="formatNum">{{total_buy_gas}}</td>
+                  <td class="formatNum">{{total_sale_gas}}</td>
+                  <td class="formatNum">{{total_tash}}</td>
+                  <td class="formatNum">{{total_card}}</td>
+                  <td class="formatNum">{{total_check}}</td>
+                  <td class="formatNum">{{total_savdo}}</td>
+                  <td class="formatNum">{{total_tushgan}}</td>
+                  <td class="formatNum">{{total_tushmagan}}</td>
+                  <td class="formatNum">{{total_profit}}</td>
+                </tr>
+              </thead>
+            </tbody>
+            <br />
+            <tbody>
+              {% for obj in object_list|slice:"6" %}
               <tr>
-                <td style="padding-left: 30px">{{obj.date}}</td>
-                <td class="formatKub" style="color: #1d98ffff">
-                  {{obj.last_gas}}
+                <td style="padding-left: 30px">
+                  <a
+                    style="color: black; text-decoration: none"
+                    href="{% url 'main:detail' obj.id %}"
+                  >
+                    {{obj.date}}</a
+                  >
+                </td>
+                <td>
+                  <a
+                    class="formatKub"
+                    style="color: #1d98ffff; text-decoration: none"
+                    href="{% url 'main:detail' obj.id %}"
+                  >
+                    {{obj.last_gas}}</a
+                  >
+                </td>
+                <td>
+                  <a
+                    class="formatNum"
+                    style="color: #1d98ffff; text-decoration: none"
+                    href="{% url 'main:detail' obj.id %}"
+                  >
+                    {{obj.aksiz_sum}}</a
+                  >
                 </td>
                 <td class="formatNum" style="color: #1d98ffff">
-                  {{obj.aksiz}}
-                </td>
-                <td class="formatNum" style="color: #1d98ffff">
-                  {{obj.buygasprice}}
-                </td>
-                <td class="formatNum" style="color: #1d98ffff">
-                  {{obj.aksiz_sum}}
+                  {{obj.elec_sum}}
                 </td>
                 <td class="formatNum" style="color: #1d98ffff">
                   {{obj.buy_sum}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.total_sum}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.company}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">{{obj.card}}</td>
+                <td class="formatNum" style="color: #1d98ffff">{{obj.chec}}</td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.sum_half}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.have_money}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.no_money}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.profit}}
                 </td>
               </tr>
               {% endfor %}
@@ -241,16 +379,16 @@
                 <th scope="col">Sotilgan</th>
                 <th scope="col">1.4% Yo'q</th>
                 <th scope="col">Qolgan</th>
-                <th scope="col">Sotish</th>
+                <th scope="col">Ja'mi</th>
+                <th scope="col">Tushum</th>
                 <th scope="col">Naqt</th>
                 <th scope="col">Plastik</th>
                 <th scope="col">Tashkilot</th>
-                <th scope="col">Tushum</th>
-                <th scope="col">Ja'mi</th>
+                <th scope="col">Sotish</th>
               </tr>
             </thead>
             <tbody>
-              {% for obj in stations|slice:"4" %}
+              {% for obj in stations|slice:"6" %}
               <tr>
                 <td style="padding-left: 30px">{{obj.date}}</td>
                 <td class="formatKub" style="color: #1d98ffff">
@@ -264,7 +402,10 @@
                 </td>
                 <td class="formatKub" style="color: #1d98ffff">{{obj.gas}}</td>
                 <td class="formatNum" style="color: #1d98ffff">
-                  {{obj.sale_price}}
+                  {{obj.total_sum}}
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{obj.sum_half}}
                 </td>
                 <td class="formatNum" style="color: #1d98ffff">{{obj.chec}}</td>
                 <td class="formatNum" style="color: #1d98ffff">{{obj.card}}</td>
@@ -272,10 +413,7 @@
                   {{obj.company}}
                 </td>
                 <td class="formatNum" style="color: #1d98ffff">
-                  {{obj.sum_half}}
-                </td>
-                <td class="formatNum" style="color: #1d98ffff">
-                  {{obj.total_sum}}
+                  {{obj.sale_price}}
                 </td>
               </tr>
               {% endfor %}
@@ -293,6 +431,7 @@
       </div>
     </div>
 
+    {% if request.user.username != "Raxbar0500" %}
     <div class="container">
       <div
         class="card w-100 shadow p-3 mb-5 bg-body rounded-3"
@@ -301,7 +440,7 @@
         <div class="card-body">
           <h5 class="card-title text-center p-2">Sozlamalar:</h5>
           <div class="row">
-            <div class="col p-2">
+            <div class="col-lg-4 col-md-6 p-2">
               <center>
                 <a
                   href="{% url 'main:add_to_maingas' %}"
@@ -311,7 +450,7 @@
                 >
               </center>
             </div>
-            <div class="col p-2">
+            <div class="col-lg-4 col-md-6 p-2">
               <center>
                 <a
                   href="{% url 'main:add_to_incomes' %}"
@@ -325,6 +464,7 @@
         </div>
       </div>
     </div>
+    {% else%} {% endif %}
     <!-- Footer -->
     <footer class="text-center" style="background-color: rgba(0, 0, 0, 0.05)">
       <!-- Grid container -->
@@ -335,7 +475,7 @@
           <a
             data-mdb-ripple-init
             class="btn text-dark btn-floating"
-            href="#!"
+            href="{{cat.get_url}}"
             role="button"
             >{{cat.name}}</a
           >

@@ -12,7 +12,9 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
-
+.ms-n5 {
+  margin-top: 5px;
+}
 #table_head_word {
   margin-left: 200px;
 }
@@ -30,21 +32,34 @@
 #table_scroll_3 {
   width: 2000px;
 }
+#table_scroll_2 {
+  width: 2200px;
+}
+
 @media (max-width: 1260px) {
   #table_scroll_2 {
-    width: 1500px;
+    width: 2000px;
+  }
+  #table_scroll_4 {
+    width: 2000px;
   }
 }
 @media (max-width: 670px) {
   #number_of_table {
     padding-left: 50px;
   }
+  .out_sale_hed {
+    overflow-x: scroll;
+  }
+  .out_sale {
+    width: 600px;
+  }
   #table_scroll {
     width: 500px;
   }
-  .scroll_div {
-    width: 400px;
-    overflow-y: scroll;
+
+  #main_scroll_in {
+    width: 350px;
   }
   #table_scroll_3 {
     width: 1500px;

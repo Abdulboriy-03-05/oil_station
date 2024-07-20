@@ -24,7 +24,7 @@
       <div class="container">
         <a class="navbar-brand" href="/">
           <img
-            src="static/img/vecteezy_gas-pump-clipart-design-illustration_9400880.png"
+            src="/static/img/vecteezy_gas-pump-clipart-design-illustration_9400880.png"
             width="50"
             alt="Picture"
           />
@@ -47,20 +47,16 @@
                 ><h6>Asosiy</h6></a
               >
             </li>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                {% for cat in categories %}
-                <li class="nav-item">
-                  <a
-                    class="nav-link active m-1"
-                    aria-current="page"
-                    href="{{cat.get_url}}"
-                    ><h6>{{ cat.name }}</h6></a
-                  >
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
+            {% for cat in categories %}
+            <li class="nav-item">
+              <a
+                class="nav-link active m-1"
+                aria-current="page"
+                href="{{cat.get_url}}"
+                ><h6>{{ cat.name }}</h6></a
+              >
+            </li>
+            {% endfor %}
             <li class="nav-item">
               <img
                 style="margin-top: 13px; margin-left: 40px"
@@ -92,30 +88,56 @@
           <h5 class="card-title p-1 pt-3">
             <span>Jami : </span> <span class="formatNum">{{total_monay}}</span>
           </h5>
-          <div style="width: 100%">
-            <div class="row scroll_div">
-              <div class="col">
-                {% for cat in categories %}
-                <a
-                  class="nav-link active"
-                  style="padding: 7px"
-                  aria-current="page"
-                  href="{{cat.get_url}}"
-                  ><h6>{{ cat.name }} :</h6></a
-                >
-                {% endfor %}
-              </div>
-              <div class="col">
-                {% for total in totals %}
-                <p
-                  class="formatNum"
-                  style="margin-top: 5px; padding: 1px; color: #1d98ffff"
-                >
-                  {{total.bill}}
-                </p>
-                {% endfor %}
-              </div>
-            </div>
+          <div style="margin-bottom: 10xp" class="table-responsive">
+            <table class="table" id="main_scroll_in">
+              <tbody>
+                <tr>
+                  {% for cat in categories|slice:"0:1" %}
+                  <td>
+                    <a
+                      class="nav-link active"
+                      aria-current="page"
+                      href="{{cat.get_url}}"
+                      ><h6>{{ cat.name }} :</h6></a
+                    >
+                  </td>
+                  {% endfor %}
+                  <td class="formatNum" style="color: #1d98ffff">
+                    {{nas_totals}}
+                  </td>
+                </tr>
+                <tr>
+                  {% for cat in categories|slice:"1:2" %}
+                  <td>
+                    <a
+                      class="nav-link active"
+                      aria-current="page"
+                      href="{{cat.get_url}}"
+                      ><h6>{{ cat.name }} :</h6></a
+                    >
+                  </td>
+                  {% endfor %}
+                  <td class="formatNum" style="color: #1d98ffff">
+                    {{san_totals}}
+                  </td>
+                </tr>
+                <tr>
+                  {% for cat in categories|slice:"2:3" %}
+                  <td>
+                    <a
+                      class="nav-link active"
+                      aria-current="page"
+                      href="{{cat.get_url}}"
+                      ><h6>{{ cat.name }} :</h6></a
+                    >
+                  </td>
+                  {% endfor %}
+                  <td class="formatNum" style="color: #1d98ffff">
+                    {{par_totals}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -130,38 +152,56 @@
             <span>Jami : </span>
             <span class="formatKub">{{total_buy_gas}}</span>
           </h5>
-          <div class="row">
-            <div class="col-6">
-              {% for cat in categories %}
-              <a
-                class="nav-link active"
-                style="padding: 7px; margin-top: 4px"
-                aria-current="page"
-                href="{{cat.get_url}}"
-                ><h6>{{ cat.name }} :</h6></a
-              >
-              {% endfor %}
-            </div>
-            <div class="col-6">
-              <p
-                class="formatKub"
-                style="margin-top: 5px; padding: 1px; color: #1d98ffff"
-              >
-                {{main_nasirullo}}
-              </p>
-              <p
-                class="formatKub"
-                style="margin-top: 3px; padding: 1px; color: #1d98ffff"
-              >
-                {{main_sanoat}}
-              </p>
-              <p
-                class="formatKub"
-                style="margin-top: 7px; padding: 1px; color: #1d98ffff"
-              >
-                {{main_parfum}}
-              </p>
-            </div>
+          <div style="margin-bottom: 10xp" class="">
+            <table class="table">
+              <tbody>
+                <tr>
+                  {% for cat in categories|slice:"0:1" %}
+                  <td>
+                    <a
+                      class="nav-link active"
+                      aria-current="page"
+                      href="{{cat.get_url}}"
+                      ><h6>{{ cat.name }} :</h6></a
+                    >
+                  </td>
+                  {% endfor %}
+                  <td class="formatKub" style="color: #1d98ffff">
+                    {{main_nasirullo}}
+                  </td>
+                </tr>
+                <tr>
+                  {% for cat in categories|slice:"1:2" %}
+                  <td>
+                    <a
+                      class="nav-link active"
+                      aria-current="page"
+                      href="{{cat.get_url}}"
+                      ><h6>{{ cat.name }} :</h6></a
+                    >
+                  </td>
+                  {% endfor %}
+                  <td class="formatKub" style="color: #1d98ffff">
+                    {{main_sanoat}}
+                  </td>
+                </tr>
+                <tr>
+                  {% for cat in categories|slice:"2:3" %}
+                  <td>
+                    <a
+                      class="nav-link active"
+                      aria-current="page"
+                      href="{{cat.get_url}}"
+                      ><h6>{{ cat.name }} :</h6></a
+                    >
+                  </td>
+                  {% endfor %}
+                  <td class="formatKub" style="color: #1d98ffff">
+                    {{main_parfum}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -176,42 +216,95 @@
             <span>Jami : </span>
             <span class="formatKub">{{total_sale_gas}}</span>
           </h5>
+
+          <div style="margin-bottom: 10xp" class="">
+            <table class="table">
+              <tbody>
+                <tr>
+                  {% for cat in categories|slice:"0:1" %}
+                  <td>
+                    <a
+                      class="nav-link active"
+                      aria-current="page"
+                      href="{{cat.get_url}}"
+                      ><h6>{{ cat.name }} :</h6></a
+                    >
+                  </td>
+                  {% endfor %}
+                  <td class="formatKub" style="color: #1d98ffff">
+                    {{gas_nasirullo}}
+                  </td>
+                </tr>
+                <tr>
+                  {% for cat in categories|slice:"1:2" %}
+                  <td>
+                    <a
+                      class="nav-link active"
+                      aria-current="page"
+                      href="{{cat.get_url}}"
+                      ><h6>{{ cat.name }} :</h6></a
+                    >
+                  </td>
+                  {% endfor %}
+                  <td class="formatKub" style="color: #1d98ffff">
+                    {{gas_sanoat}}
+                  </td>
+                </tr>
+                <tr>
+                  {% for cat in categories|slice:"2:3" %}
+                  <td>
+                    <a
+                      class="nav-link active"
+                      aria-current="page"
+                      href="{{cat.get_url}}"
+                      ><h6>{{ cat.name }} :</h6></a
+                    >
+                  </td>
+                  {% endfor %}
+                  <td class="formatKub" style="color: #1d98ffff">
+                    {{gas_parfum}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if request.user.username != "Raxbar0500" %}
+    <div class="container">
+      <div
+        class="card w-100 shadow p-3 mb-5 bg-body rounded-3"
+        style="background-color: lightskyblue"
+      >
+        <div class="card-body">
+          <h5 class="card-title text-center p-2">Sozlamalar:</h5>
           <div class="row">
-            <div class="col">
-              {% for cat in categories %}
-              <a
-                class="nav-link active"
-                style="padding: 7px"
-                aria-current="page"
-                href="{{cat.get_url}}"
-                ><h6>{{ cat.name }} :</h6></a
-              >
-              {% endfor %}
+            <div class="col-lg-4 col-md-6 p-2">
+              <center>
+                <a
+                  href="{% url 'main:add_to_maingas' %}"
+                  style="margin-top: 10px"
+                  class="btn btn-primary"
+                  >Gaz qo'shish</a
+                >
+              </center>
             </div>
-            <div class="col">
-              <p
-                class="formatKub"
-                style="margin-top: 5px; padding: 1px; color: #1d98ffff"
-              >
-                {{gas_nasirullo}}
-              </p>
-              <p
-                class="formatKub"
-                style="margin-top: 3px; padding: 1px; color: #1d98ffff"
-              >
-                {{gas_sanoat}}
-              </p>
-              <p
-                class="formatKub"
-                style="margin-top: 7px; padding: 1px; color: #1d98ffff"
-              >
-                {{gas_parfum}}
-              </p>
+            <div class="col-lg-4 col-md-6 p-2">
+              <center>
+                <a
+                  href="{% url 'main:add_to_incomes' %}"
+                  style="margin-top: 10px"
+                  class="btn btn-primary"
+                  >Xarajat qo'shish</a
+                >
+              </center>
             </div>
           </div>
         </div>
       </div>
     </div>
+    {% else%} {% endif %}
     <br />
 
     <!-- Footer -->
@@ -224,7 +317,7 @@
           <a
             data-mdb-ripple-init
             class="btn text-dark btn-floating"
-            href="#!"
+            href="{{cat.get_url}}"
             role="button"
             >{{cat.name}}</a
           >
