@@ -280,7 +280,8 @@
         <div class="card-body">
           <h5 class="card-title text-center p-2">Sozlamalar:</h5>
           <div class="row">
-            <div class="col-lg-4 col-md-6 p-2">
+            {% if add == 3 %}
+            <div class="col-lg-3 col-md-6 p-2">
               <center>
                 <a
                   href="{% url 'main:add_to_maingas' %}"
@@ -290,13 +291,55 @@
                 >
               </center>
             </div>
-            <div class="col-lg-4 col-md-6 p-2">
+            {% else %}
+            <div class="col-lg-3 col-md-6 p-2">
+              <center>
+                <a
+                  href="{% url 'main:add_to_maingas_yestarday' %}"
+                  style="margin-top: 10px"
+                  class="btn btn-primary"
+                  >Kechagi gazni qo'shish</a
+                >
+              </center>
+            </div>
+            {% endif %}
+            <div class="col-lg-3 col-md-6 p-2">
               <center>
                 <a
                   href="{% url 'main:add_to_incomes' %}"
                   style="margin-top: 10px"
                   class="btn btn-primary"
                   >Xarajat qo'shish</a
+                >
+              </center>
+            </div>
+            <div class="col-lg-3 col-md-6 p-2">
+              <center>
+                <a
+                  href="{% url 'main:pay_credit' %}"
+                  style="margin-top: 10px"
+                  class="btn btn-primary"
+                  >Kredit so'ndirish</a
+                >
+              </center>
+            </div>
+            <div class="col-lg-3 col-md-6 p-2">
+              <center>
+                <a
+                  href="{% url 'main:borrow_money' %}"
+                  style="margin-top: 10px"
+                  class="btn btn-primary"
+                  >O'zaro pul o'tkazish</a
+                >
+              </center>
+            </div>
+            <div class="col-lg-3 col-md-6 p-2">
+              <center>
+                <a
+                  href="{% url 'main:additional_money' %}"
+                  style="margin-top: 10px"
+                  class="btn btn-primary"
+                  >Qo'shimcha pul</a
                 >
               </center>
             </div>

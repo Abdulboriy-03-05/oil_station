@@ -81,51 +81,77 @@
       </div>
     </nav>
     <br />
-    <h5 class="text-center p-3">{{cattitle}} ning asosiy xisobotlari</h5>
+    <h5 class="text-center p-3">{{cattitle}} ning aksiz xisobotlari:</h5>
     <div class="container">
       <div class="card w-100 shadow p-3 mb-5 bg-body rounded-3">
         <div class="card-body">
-          <div class="text-center">
-            <h5 class="card-title p-2 pt-3">Kirim:</h5>
-            <h5 class="card-title p-1">
-              <span>Jami : </span>
-              <span class="formatNum" style="color: #1d98ffff"
-                >{{income_total}}</span
-              >
-            </h5>
-          </div>
-          <br />
-          <div class="table-responsive overflow-scroll">
-            <div style="height: 400px">
-              <table class="table" id="main_report_scroll">
+          <h5 class="card-title text-center p-2">Umumiy:</h5>
+          <div
+            style="margin-bottom: 10xp"
+            class="table-responsive overflow-scroll"
+          >
+            <div style="height: 300px">
+              <table class="table" id="gas_report_scroll">
                 <thead>
-                  <th style="padding-left: 30px">Sum*</th>
-                  <th>Izox*</th>
+                  <th style="padding-left: 30px">Xisob raqam*</th>
                   <th>Sana*</th>
                 </thead>
                 <tbody>
+                  {% for gas in gases %}
                   <tr>
                     <td>
-                      {% for icome in main_income %}
+                      <p style="margin-left: 10px" class="formatNum">
+                        {{gas.bill}}
+                      </p>
+                    </td>
+                    <td>
+                      <p style="margin-left: 10px">{{gas.date}}</p>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card w-100 shadow p-3 mb-5 bg-body rounded-3">
+        <div class="card-body">
+          <h5 class="card-title text-center p-2">Kirim:</h5>
+          <h5 class="card-title text-center p-2">
+            <span>Jami:</span>
+            <span class="formatNum" style="color: #1d98ffff"
+              >{{income_total}}</span
+            >
+          </h5>
+          <div
+            style="margin-bottom: 10xp"
+            class="table-responsive overflow-scroll"
+          >
+            <div style="height: 300px">
+              <table class="table" id="gas_report_scroll">
+                <thead>
+                  <th style="padding-left: 30px">Summa*</th>
+                  <th>Sana*</th>
+                </thead>
+                <tbody>
+                  {% for income in gas_income %}
+                  <tr>
+                    <td>
                       <p
                         style="margin-left: 10px; color: #1d98ffff"
                         class="formatNum"
                       >
-                        {{icome.income}}
+                        {{income.income}}
                       </p>
-                      {% endfor %}
                     </td>
                     <td>
-                      {% for icome in main_income %}
-                      <p>{{icome.description|slice:":20"}}</p>
-                      {% endfor %}
-                    </td>
-                    <td>
-                      {% for icome in main_income %}
-                      <p>{{icome.date}}</p>
-                      {% endfor %}
+                      <p style="margin-left: 10px">{{income.date}}</p>
                     </td>
                   </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
@@ -136,73 +162,37 @@
     <div class="container">
       <div class="card w-100 shadow p-3 mb-5 bg-body rounded-3">
         <div class="card-body">
-          <div class="text-center">
-            <h5 class="card-title p-2 pt-3">Chikim:</h5>
-            <h5 class="card-title p-1">
-              <span>Jami : </span>
-              <span class="formatNum" style="color: red"
-                >{{outcome_total}}</span
-              >
-            </h5>
-            <h6 class="card-title p-1">
-              <span>Gaz uchun : </span>
-              <span class="formatNum" style="color: red">{{gas_total}}</span>
-            </h6>
-            <h6 class="card-title p-1">
-              <span>Aksiz uchun : </span>
-              <span class="formatNum" style="color: red">{{aksiz_total}}</span>
-            </h6>
-            <h6 class="card-title p-1">
-              <span>Elektor uchun : </span>
-              <span class="formatNum" style="color: red"
-                >{{elektor_total}}</span
-              >
-            </h6>
-            <h6 class="card-title p-1">
-              <span>Kredit uchun : </span>
-              <span class="formatNum" style="color: red">{{kredit_total}}</span>
-            </h6>
-            <h6 class="card-title p-1">
-              <span>Boshqalar uchun : </span>
-              <span class="formatNum" style="color: red">{{other_total}}</span>
-            </h6>
-            <h6 class="card-title p-1">
-              <span>Qarz bergan : </span>
-              <span class="formatNum" style="color: red">{{debt_total}}</span>
-            </h6>
-          </div>
-          <br />
-          <div class="table-responsive overflow-scroll">
-            <div style="height: 400px">
-              <table class="table" id="main_report_scroll">
+          <h5 class="card-title text-center p-2">Chiqim:</h5>
+          <h5 class="card-title text-center p-2">
+            <span>Jami:</span>
+            <span class="formatNum" style="color: red">{{outcome_total}}</span>
+          </h5>
+          <div
+            style="margin-bottom: 10xp"
+            class="table-responsive overflow-scroll"
+          >
+            <div style="height: 300px">
+              <table class="table" id="gas_report_scroll">
                 <thead>
-                  <th style="padding-left: 30px">Sum*</th>
-                  <th>Izox*</th>
+                  <th style="padding-left: 30px">Summa*</th>
                   <th>Sana*</th>
                 </thead>
                 <tbody>
+                  {% for outcome in gas_outcome %}
                   <tr>
                     <td>
-                      {% for out in main_outcome %}
                       <p
                         style="margin-left: 10px; color: red"
                         class="formatNum"
                       >
-                        {{out.outcome}}
+                        {{outcome.outcome}}
                       </p>
-                      {% endfor %}
                     </td>
                     <td>
-                      {% for out in main_outcome %}
-                      <p>{{out.description|slice:":20"}}</p>
-                      {% endfor %}
-                    </td>
-                    <td>
-                      {% for out in main_outcome %}
-                      <p>{{out.date}}</p>
-                      {% endfor %}
+                      <p style="margin-left: 10px">{{outcome.date}}</p>
                     </td>
                   </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
@@ -210,6 +200,7 @@
         </div>
       </div>
     </div>
+
     <br />
 
     <!-- Footer -->

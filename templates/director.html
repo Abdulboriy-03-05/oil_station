@@ -140,45 +140,47 @@
             </a>
           </div>
         </div>
-        <div class="table-responsive">
-          <table class="table" id="table_scroll_2">
-            <thead>
-              <tr>
-                <th scope="col" style="padding-left: 30px">Sana</th>
-                <th scope="col">Xisoblagich</th>
-                <th scope="col">Sotilgan</th>
-                <th scope="col">1.4% Yo'q</th>
-                <th scope="col">Gaz ta'ni</th>
-                <th scope="col">Sotish</th>
-                <th scope="col">Naqt</th>
-                <th scope="col">Plastik</th>
-                <th scope="col">Uzcard</th>
-                <th scope="col">Humo</th>
-                <th scope="col">Tashkilot</th>
-                <th scope="col">Tushum</th>
-                <th scope="col">Ja'mi</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for obj in object|slice:"4" %}
-              <tr>
-                <td style="padding-left: 30px; width: 170px">{{obj.date}}</td>
-                <td class="formatKub">{{obj.counter}}</td>
-                <td class="formatKub">{{obj.total_gas}}</td>
-                <td class="formatKub">{{obj.lose_gas}}</td>
-                <td class="formatKub">{{obj.gas}}</td>
-                <td class="formatNum">{{obj.sale_price}}</td>
-                <td class="formatNum">{{obj.chec}}</td>
-                <td class="formatNum">{{obj.card}}</td>
-                <td class="formatNum">{{obj.card_uz}}</td>
-                <td class="formatNum">{{obj.card_humo}}</td>
-                <td class="formatNum">{{obj.company}}</td>
-                <td class="formatNum">{{obj.sum_half}}</td>
-                <td class="formatNum">{{obj.total_sum}}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+        <div class="table-responsive overflow-scroll">
+          <div style="height: 400px">
+            <table class="table" id="table_scroll_2">
+              <thead>
+                <tr>
+                  <th scope="col" style="padding-left: 30px">Sana</th>
+                  <th scope="col">Xisoblagich</th>
+                  <th scope="col">Sotilgan</th>
+                  <th scope="col">1.4% Yo'q</th>
+                  <th scope="col">Gaz ta'ni</th>
+                  <th scope="col">Sotish</th>
+                  <th scope="col">Naqt</th>
+                  <th scope="col">Plastik</th>
+                  <th scope="col">Uzcard</th>
+                  <th scope="col">Humo</th>
+                  <th scope="col">Tashkilot</th>
+                  <th scope="col">Tushum</th>
+                  <th scope="col">Ja'mi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in object|slice:"4" %}
+                <tr>
+                  <td style="padding-left: 30px; width: 170px">{{obj.date}}</td>
+                  <td class="formatKub">{{obj.counter}}</td>
+                  <td class="formatKub">{{obj.total_gas}}</td>
+                  <td class="formatKub">{{obj.lose_gas}}</td>
+                  <td class="formatKub">{{obj.gas}}</td>
+                  <td class="formatNum">{{obj.sale_price}}</td>
+                  <td class="formatNum">{{obj.chec}}</td>
+                  <td class="formatNum">{{obj.card}}</td>
+                  <td class="formatNum">{{obj.card_uz}}</td>
+                  <td class="formatNum">{{obj.card_humo}}</td>
+                  <td class="formatNum">{{obj.company}}</td>
+                  <td class="formatNum">{{obj.sum_half}}</td>
+                  <td class="formatNum">{{obj.total_sum}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="d-grid gap-1 d-md-flex justify-content-end">
           <a

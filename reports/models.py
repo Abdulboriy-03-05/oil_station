@@ -161,6 +161,20 @@ class Addmaingas(models.Model):
     
 
 
+class Borrow_money(models.Model):
+    bring_money = models.ForeignKey(Filial, verbose_name="Qayerdan*",on_delete=models.DO_NOTHING, default=None, null=True,related_name="bring_money") 
+    get_money = models.ForeignKey(Filial, verbose_name="Qayerga*",on_delete=models.DO_NOTHING, default=None, null=True,related_name="get_money") 
+    bill = models.PositiveIntegerField("Summa*", default=0, null=True, blank=True)
+    date = models.DateField("Vaqt",)
+
+    class Meta:
+        verbose_name = "O'zaro otkazma"
+        verbose_name_plural = "O'zaro otkazmalar"
+    
+    def __str__(self):
+        return f"{self.date, self.bring_money}"
+
+
 
 class Main_XR(models.Model):
     category = models.ForeignKey(Filial,verbose_name="Main_XR",on_delete=models.DO_NOTHING, default=None, null=True,related_name="filal_main_xr")
@@ -172,11 +186,12 @@ class Main_XR(models.Model):
         verbose_name_plural = "Asosiy X/R"
     
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
 
 class Main_XR_income(models.Model):
-    category = models.ForeignKey(Filial,verbose_name="Main_XR_income", on_delete=models.DO_NOTHING, default=None,null=True,related_name="main_income")
-    income = models.IntegerField("Main_income",default=0,null=True,blank=True)
+    category = models.ForeignKey(Filial,verbose_name="Qayerga*", on_delete=models.DO_NOTHING, default=None,null=True,related_name="main_income")
+    income = models.IntegerField("Summa*",default=0,null=True,blank=True)
+    description = models.TextField("Qayerdan*", max_length=50)
     date = models.DateField("Vaqt", auto_now_add=True,)
  
     class Meta:
@@ -291,7 +306,7 @@ class Aksiz_XR_outcome(models.Model):
 
 class Elector_XR(models.Model):
     category = models.ForeignKey(Filial,verbose_name="Elektrosvet", on_delete=models.DO_NOTHING, default=None,null=True,related_name="elctor")
-    bill = models.PositiveIntegerField("Elektro svet xisob", default=0, null=True,blank=True)
+    bill = models.IntegerField("Elektro svet xisob", default=0, null=True,blank=True)
     date = models.DateField("Vaqt")
 
     class Meta:
@@ -353,7 +368,7 @@ class Company_XR(models.Model):
 class Company_XR_income(models.Model):
     category = models.ForeignKey(Filial,verbose_name="Tashkilot_income", on_delete=models.DO_NOTHING, default=None,null=True,related_name="companies_income")
     income = models.IntegerField("Tashkilot income",default=0,null=True,blank=True)
-    date = models.DateField("Vaqt", auto_now_add=True,)
+    date = models.DateField("Vaqt",)
 
 
     class Meta:
@@ -364,6 +379,19 @@ class Company_XR_income(models.Model):
         return f"{self.category}"
     
 
+
+
+class Debts(models.Model):
+    category = models.ForeignKey(Filial,verbose_name="Qarzlar berilgan", on_delete=models.DO_NOTHING, default=None,null=True,related_name="qarzlar_bergan")
+    debt = models.IntegerField("Qarzlar",default=0,null=True,blank=True)
+    date = models.DateField("Vaqt",)
+
+    class Meta:
+        ordering = ["-id"]
+        verbose_name = "Qarzlar bergan"
+    
+    def __str__(self):
+        return f"{self.category}"
 
 
 
@@ -380,9 +408,10 @@ class Credit(models.Model):
 
 
 class Credit_income(models.Model):
-    category = models.ForeignKey(Filial,verbose_name="Kredit_income", on_delete=models.DO_NOTHING, default=None,null=True,related_name="kredit_income")
-    income = models.IntegerField("Kredit income",default=0,null=True,blank=True)
-    date = models.DateField("Vaqt", auto_now_add=True,)
+    category = models.ForeignKey(Filial,verbose_name="Qaysi filialga", on_delete=models.DO_NOTHING, default=None,null=True,related_name="kredit_income")
+    dollar = models.IntegerField("Dollar",default=0,null=True,blank=True)
+    income = models.IntegerField("So'm",default=0,null=True,blank=True)
+    date = models.DateField("Vaqt",)
 
 
     class Meta:
@@ -425,7 +454,7 @@ class Incomes(models.Model):
 
 class Income_XRS(models.Model):
     category = models.ForeignKey(Filial,verbose_name="Qaysi fililalga", on_delete=models.DO_NOTHING, default=None,null=True,related_name="filial")
-    income = models.ForeignKey(Incomes,verbose_name="Qayerga", on_delete=models.DO_NOTHING, default=None,null=True,related_name="income")
+    income = models.ForeignKey(Incomes,verbose_name="Qayerga", on_delete=models.CASCADE, default=None,null=True,related_name="income")
     sum = models.IntegerField('Summa',null=True,default=0,blank=True)
     description = models.TextField("Izoh",)
     date = models.DateField("Vaqt", auto_now_add=True,)

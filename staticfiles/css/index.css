@@ -35,6 +35,9 @@
 #table_scroll_2 {
   width: 2200px;
 }
+#table_scroll_4 {
+  width: 2000px;
+}
 
 @media (max-width: 1260px) {
   #table_scroll_2 {
@@ -60,6 +63,15 @@
 
   #main_scroll_in {
     width: 350px;
+  }
+  #main_out_scroll {
+    width: 500px;
+  }
+  #gas_report_scroll {
+    width: 400px;
+  }
+  #main_report_scroll {
+    width: 500px;
   }
   #table_scroll_3 {
     width: 1500px;

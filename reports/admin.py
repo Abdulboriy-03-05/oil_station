@@ -31,6 +31,11 @@ class LosegasAdmin(admin.ModelAdmin):
 class LosegasAdmin(admin.ModelAdmin):
     list_diplay = ['losegas','date']
 
+@admin.register(Borrow_money)
+class BorrowAdmin(admin.ModelAdmin):
+    list_diplay = ['bill','date']
+
+
 
 @admin.register(Parfum_lose)
 class LosegasAdmin(admin.ModelAdmin):
@@ -124,6 +129,10 @@ class Others_incomeAdmin(admin.ModelAdmin):
 
 @admin.register(Credit_income)
 class Credit_incomeAdmin(admin.ModelAdmin):
+    list_diplay = ["income"]
+
+@admin.register(Debts)
+class DebtsAdmin(admin.ModelAdmin):
     list_diplay = ["income"]
 
 

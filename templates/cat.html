@@ -80,7 +80,9 @@
     <div class="container p-4">
       <div class="row shadow p-3 mb-5 bg-body rounded-3">
         <div class="col-md-5 mx-auto">
-          <div class="small fw-light">Sanani bo'yicha saralash</div>
+          <div class="small fw-light">
+            <h5 class="text-center">Sanani bo'yicha qidirish</h5>
+          </div>
           <form action="#" method="get">
             <div class="input-group">
               <input
@@ -120,13 +122,19 @@
             </thead>
             <tbody>
               <tr>
+                {% if category_name == 'Nasirullo-xoji' %}
                 <td style="padding-left: 30px">1</td>
-                <td><a href="#" class="table_xr">Asosiy</a></td>
+                <td>
+                  <a
+                    href="{% url 'main:main_reports_nasirullo' %}"
+                    class="table_xr"
+                    >Asosiy</a
+                  >
+                </td>
                 <td class="formatNum" style="color: #1d98ffff">
                   {{main_xr.bill}}
                 </td>
                 <td>
-                  {% if category_name == 'Nasirullo-xoji' %}
                   <a
                     href="{% url 'main:nasirullo_outcome' %}"
                     style="color: #1d98ffff; text-decoration: none"
@@ -134,7 +142,20 @@
                   >
                     {{out_main}}
                   </a>
-                  {% elif category_name == 'Sanoat-tranzit' %}
+                </td>
+                {% elif category_name == 'Sanoat-tranzit' %}
+                <td style="padding-left: 30px">1</td>
+                <td>
+                  <a
+                    href="{% url 'main:main_reports_sanoat' %}"
+                    class="table_xr"
+                    >Asosiy</a
+                  >
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{main_xr.bill}}
+                </td>
+                <td>
                   <a
                     href="{% url 'main:sanoat_outcome' %}"
                     style="color: #1d98ffff; text-decoration: none"
@@ -142,7 +163,20 @@
                   >
                     {{out_main}}
                   </a>
-                  {% elif category_name == 'Parfum-distibyuter' %}
+                </td>
+                {% elif category_name == 'Parfum-distibyuter' %}
+                <td style="padding-left: 30px">1</td>
+                <td>
+                  <a
+                    href="{% url 'main:main_reports_parfum' %}"
+                    class="table_xr"
+                    >Asosiy</a
+                  >
+                </td>
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{main_xr.bill}}
+                </td>
+                <td>
                   <a
                     href="{% url 'main:parfum_outcome' %}"
                     style="color: #1d98ffff; text-decoration: none"
@@ -154,8 +188,15 @@
                 </td>
               </tr>
               <tr>
+                {% if category_name == 'Nasirullo-xoji' %}
                 <td style="padding-left: 30px">2</td>
-                <td><a href="" class="table_xr">Xudud gaz</a></td>
+                <td>
+                  <a
+                    href="{% url 'main:nasirullo_gas_raports' %}"
+                    class="table_xr"
+                    >Xudud gaz</a
+                  >
+                </td>
                 {% if xudud_xr.bill > 0 %}
                 <td class="formatNum" style="color: #1d98ffff">
                   {{xudud_xr.bill}}
@@ -164,13 +205,60 @@
                 <td class="formatNum" style="color: red">{{xudud_xr.bill}}</td>
                 {% endif %} {% for out in out_xudud|slice:'1' %}
                 <td class="formatNum" style="color: #1d98ffff">
-                  <a href="">{{out.outcome}}</a>
+                  <a href="{% url 'main:nasirullo_gas_raports' %}"
+                    >{{out.outcome}}</a
+                  >
                 </td>
-                {% endfor %}
+                {% endfor %} {% elif category_name == 'Sanoat-tranzit' %}
+                <td style="padding-left: 30px">2</td>
+                <td>
+                  <a href="{% url 'main:sanoat_gas_raports' %}" class="table_xr"
+                    >Xudud gaz</a
+                  >
+                </td>
+                {% if xudud_xr.bill > 0 %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{xudud_xr.bill}}
+                </td>
+                {% else %}
+                <td class="formatNum" style="color: red">{{xudud_xr.bill}}</td>
+                {% endif %} {% for out in out_xudud|slice:'1' %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  <a href="{% url 'main:sanoat_gas_raports' %}"
+                    >{{out.outcome}}</a
+                  >
+                </td>
+                {% endfor %} {% elif category_name == 'Parfum-distibyuter' %}
+                <td style="padding-left: 30px">2</td>
+                <td>
+                  <a href="{% url 'main:parfum_gas_raports' %}" class="table_xr"
+                    >Xudud gaz</a
+                  >
+                </td>
+                {% if xudud_xr.bill > 0 %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{xudud_xr.bill}}
+                </td>
+                {% else %}
+                <td class="formatNum" style="color: red">{{xudud_xr.bill}}</td>
+                {% endif %} {% for out in out_xudud|slice:'1' %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  <a href="{% url 'main:parfum_gas_raports' %}"
+                    >{{out.outcome}}</a
+                  >
+                </td>
+                {% endfor %} {% endif %}
               </tr>
               <tr>
+                {% if category_name == 'Nasirullo-xoji' %}
                 <td style="padding-left: 30px">3</td>
-                <td><a href="" class="table_xr">Aksiz</a></td>
+                <td>
+                  <a
+                    href="{% url 'main:nasirullo_aksiz_raports' %}"
+                    class="table_xr"
+                    >Aksiz</a
+                  >
+                </td>
                 {% if aksiz_xr.bill > 0 %}
                 <td class="formatNum" style="color: #1d98ffff">
                   {{aksiz_xr.bill}}
@@ -179,13 +267,64 @@
                 <td class="formatNum" style="color: red">{{aksiz_xr.bill}}</td>
                 {% endif %} {% for out in out_aksiz|slice:'1' %}
                 <td class="formatNum" style="color: #1d98ffff">
-                  <a href="">{{out.outcome}}</a>
+                  <a href="{% url 'main:nasirullo_aksiz_raports' %}"
+                    >{{out.outcome}}</a
+                  >
                 </td>
-                {% endfor %}
+                {% endfor %} {% elif category_name == 'Sanoat-tranzit' %}
+                <td style="padding-left: 30px">3</td>
+                <td>
+                  <a
+                    href="{% url 'main:sanoat_aksiz_raports' %}"
+                    class="table_xr"
+                    >Aksiz</a
+                  >
+                </td>
+                {% if aksiz_xr.bill > 0 %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{aksiz_xr.bill}}
+                </td>
+                {% else %}
+                <td class="formatNum" style="color: red">{{aksiz_xr.bill}}</td>
+                {% endif %} {% for out in out_aksiz|slice:'1' %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  <a href="{% url 'main:sanoat_aksiz_raports' %}"
+                    >{{out.outcome}}</a
+                  >
+                </td>
+                {% endfor %} {% elif category_name == 'Parfum-distibyuter' %}
+                <td style="padding-left: 30px">3</td>
+                <td>
+                  <a
+                    href="{% url 'main:parfum_aksiz_raports' %}"
+                    class="table_xr"
+                    >Aksiz</a
+                  >
+                </td>
+                {% if aksiz_xr.bill > 0 %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{aksiz_xr.bill}}
+                </td>
+                {% else %}
+                <td class="formatNum" style="color: red">{{aksiz_xr.bill}}</td>
+                {% endif %} {% for out in out_aksiz|slice:'1' %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  <a href="{% url 'main:parfum_aksiz_raports' %}"
+                    >{{out.outcome}}</a
+                  >
+                </td>
+                {% endfor %} {% endif %}
               </tr>
               <tr>
+                {% if category_name == 'Nasirullo-xoji' %}
                 <td style="padding-left: 30px">4</td>
-                <td><a href="" class="table_xr">Elektor</a></td>
+                <td>
+                  <a
+                    href="{% url 'main:nasirullo_elector_raports' %}"
+                    class="table_xr"
+                    >Elektor</a
+                  >
+                </td>
                 {% if elector.bill > 0 %}
                 <td class="formatNum" style="color: #1d98ffff">
                   {{elector.bill}}
@@ -194,23 +333,122 @@
                 <td class="formatNum" style="color: red">{{elector.bill}}</td>
                 {% endif %} {% for out in out_elec|slice:'1' %}
                 <td class="formatNum" style="color: #1d98ffff">
-                  <a href="">{{out.outcome}}</a>
+                  <a href="{% url 'main:nasirullo_elector_raports' %}"
+                    >{{out.outcome}}</a
+                  >
                 </td>
-                {% endfor %}
+                {% endfor %} {% elif category_name == 'Sanoat-tranzit' %}
+                <td style="padding-left: 30px">4</td>
+                <td>
+                  <a
+                    href="{% url 'main:sanoat_elector_raports' %}"
+                    class="table_xr"
+                    >Elektor</a
+                  >
+                </td>
+                {% if elector.bill > 0 %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{elector.bill}}
+                </td>
+                {% else %}
+                <td class="formatNum" style="color: red">{{elector.bill}}</td>
+                {% endif %} {% for out in out_elec|slice:'1' %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  <a href="{% url 'main:sanoat_elector_raports' %}"
+                    >{{out.outcome}}</a
+                  >
+                </td>
+                {% endfor %}{% elif category_name == 'Parfum-distibyuter' %}
+                <td style="padding-left: 30px">4</td>
+                <td>
+                  <a
+                    href="{% url 'main:parfum_elector_raports' %}"
+                    class="table_xr"
+                    >Elektor</a
+                  >
+                </td>
+                {% if elector.bill > 0 %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  {{elector.bill}}
+                </td>
+                {% else %}
+                <td class="formatNum" style="color: red">{{elector.bill}}</td>
+                {% endif %} {% for out in out_elec|slice:'1' %}
+                <td class="formatNum" style="color: #1d98ffff">
+                  <a href="{% url 'main:parfum_elector_raports' %}"
+                    >{{out.outcome}}</a
+                  >
+                </td>
+                {% endfor %} {% endif %}
               </tr>
               <tr>
+                {% if category_name == 'Nasirullo-xoji' %}
                 <td style="padding-left: 30px">5</td>
                 <td>
-                  <a href="" class="table_xr">Tashkilotlar</a>
+                  <a href="{% url 'main:nasirullo_company' %}" class="table_xr"
+                    >Tashkilotlar</a
+                  >
                 </td>
-                <td class="formatNum" style="color: #1d98ffff">
+                <td>
+                  <a
+                    href="{% url 'main:nasirullo_company' %}"
+                    style="color: #1d98ffff; text-decoration: none"
+                    class="formatNum"
+                  >
+                    {{company.bill}}
+                  </a>
+                </td>
+                {% for out in out_company|slice:'1' %}
+                <td>
+                  <a
+                    style="color: #1d98ffff; text-decoration: none"
+                    href="{% url 'main:nasirullo_company' %}"
+                  >
+                    {{out.income}}</a
+                  >
+                </td>
+                {% endfor %} {% elif category_name == 'Sanoat-tranzit' %}
+                <td style="padding-left: 30px">5</td>
+                <td>
+                  <a class="table_xr">Tashkilotlar</a>
+                </td>
+                <td
+                  style="color: #1d98ffff; text-decoration: none"
+                  class="formatNum"
+                >
                   {{company.bill}}
                 </td>
                 {% for out in out_company|slice:'1' %}
                 <td class="formatNum" style="color: #1d98ffff">
-                  <a href=""> {{out.income}}</a>
+                  {{out.income}}
                 </td>
-                {% endfor %}
+                {% endfor %} {% elif category_name == 'Parfum-distibyuter' %}
+                <td style="padding-left: 30px">5</td>
+                <td>
+                  <a href="{% url 'main:parfum_company' %}" class="table_xr"
+                    >Tashkilotlar</a
+                  >
+                </td>
+                <td>
+                  <a
+                    href="{% url 'main:parfum_company' %}"
+                    style="color: #1d98ffff; text-decoration: none"
+                    class="formatNum"
+                  >
+                    {{company.bill}}
+                  </a>
+                </td>
+                {% for out in out_company|slice:'1' %}
+                <td>
+                  <a
+                    class="formatNum"
+                    style="color: #1d98ffff; text-decoration: none"
+                    href="{% url 'main:parfum_company' %}"
+                  >
+                    {{out.income}}</a
+                  >
+                </td>
+                {% endfor %} {% endif %}
               </tr>
               <tr>
                 <td style="padding-left: 30px">6</td>
@@ -222,8 +460,8 @@
                 {% else %}
                 <td class="formatUsd" style="color: red">{{cardit.bill}}</td>
                 {% endif %} {% for out in out_credit|slice:'1' %}
-                <td class="formatUsd">
-                  <a href="" style="color: #1d98ffff"> {{out.income}}</a>
+                <td class="formatUsd" style="color: #1d98ffff">
+                  {{out.dollar}}
                 </td>
                 {% endfor %}
               </tr>
@@ -356,12 +594,24 @@
           </table>
         </div>
         <div class="d-grid gap-1 d-md-flex justify-content-end">
+          {% if category_name == 'Nasirullo-xoji' %}<a
+            href="{% url 'main:all_sale_gas_nasirullo' %}"
+            style="margin-top: 15px"
+            class="btn btn-outline-primary btn-sm"
+            >more ...</a
+          >{% elif category_name == 'Sanoat-tranzit' %}<a
+            href="{% url 'main:all_sale_gas_sanoat' %}"
+            style="margin-top: 15px"
+            class="btn btn-outline-primary btn-sm"
+            >more ...</a
+          >{% elif category_name == 'Parfum-distibyuter' %}
           <a
-            href="#"
+            href="{% url 'main:all_sale_gas_parfum' %}"
             style="margin-top: 15px"
             class="btn btn-outline-primary btn-sm"
             >more ...</a
           >
+          {% endif %}
         </div>
       </div>
     </div>
@@ -440,7 +690,8 @@
         <div class="card-body">
           <h5 class="card-title text-center p-2">Sozlamalar:</h5>
           <div class="row">
-            <div class="col-lg-4 col-md-6 p-2">
+            {% if add == 3 %}
+            <div class="col-lg-3 col-md-6 p-2">
               <center>
                 <a
                   href="{% url 'main:add_to_maingas' %}"
@@ -450,13 +701,55 @@
                 >
               </center>
             </div>
-            <div class="col-lg-4 col-md-6 p-2">
+            {% else %}
+            <div class="col-lg-3 col-md-6 p-2">
+              <center>
+                <a
+                  href="{% url 'main:add_to_maingas_yestarday' %}"
+                  style="margin-top: 10px"
+                  class="btn btn-primary"
+                  >Kechagi gazni qo'shish</a
+                >
+              </center>
+            </div>
+            {% endif %}
+            <div class="col-lg-3 col-md-6 p-2">
               <center>
                 <a
                   href="{% url 'main:add_to_incomes' %}"
                   style="margin-top: 10px"
                   class="btn btn-primary"
                   >Xarajat qo'shish</a
+                >
+              </center>
+            </div>
+            <div class="col-lg-3 col-md-6 p-2">
+              <center>
+                <a
+                  href="{% url 'main:pay_credit' %}"
+                  style="margin-top: 10px"
+                  class="btn btn-primary"
+                  >Kredit so'ndirish</a
+                >
+              </center>
+            </div>
+            <div class="col-lg-3 col-md-6 p-2">
+              <center>
+                <a
+                  href="{% url 'main:borrow_money' %}"
+                  style="margin-top: 10px"
+                  class="btn btn-primary"
+                  >O'zaro pul o'tkazish</a
+                >
+              </center>
+            </div>
+            <div class="col-lg-3 col-md-6 p-2">
+              <center>
+                <a
+                  href="{% url 'main:additional_money' %}"
+                  style="margin-top: 10px"
+                  class="btn btn-primary"
+                  >Qo'shimcha pul</a
                 >
               </center>
             </div>
