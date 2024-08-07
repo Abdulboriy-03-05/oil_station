@@ -17,6 +17,10 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
     <link rel="stylesheet" href="/static/css/index.css" />
   </head>
   <body>
@@ -88,9 +92,13 @@
           <h5 class="card-title text-center p-2">
             {{cattitle}} ning bugungi chiqimlari:
           </h5>
-          <h5 class="card-title p-3 pt-3">
-            <span>Jami : </span> <span class="formatNum">{{total_today}}</span>
-          </h5>
+          <h6 class="card-title p-3 pt-3">
+            <span>Jami : </span>
+            <span class="formatNum" style="color: red">{{total_today}}</span>
+          </h6>
+          {% if today_objects == 0 %}
+          <h5 class="text-center">Bugun chikimlar yo'q:</h5>
+          {% else %}
           <div style="margin-bottom: 10xp" class="table-responsive">
             <table class="table" id="main_out_scroll">
               <thead>
@@ -99,28 +107,31 @@
                 <th>Sana*</th>
               </thead>
               <tbody>
+                {% for object in today_objects %}
                 <tr>
                   <td>
-                    {% for today_out in today_outcome %}
-                    <p style="margin-left: 10px" class="formatNum">
-                      {{today_out}}
+                    <p style="margin-left: 10px; color: red" class="formatNum">
+                      {{object.outcome}}
                     </p>
-                    {% endfor %}
                   </td>
                   <td>
-                    {% for today_des in today_descript %}
-                    <p>{{today_des|slice:":20"}}</p>
-                    {% endfor %}
+                    <p>{{object.description|slice:":20"}}</p>
                   </td>
                   <td>
-                    {% for today_da in today_date %}
-                    <p>{{today_da}}</p>
-                    {% endfor %}
+                    <p>{{object.date}}</p>
+                  </td>
+
+                  <td>
+                    <a href="{% url 'main:delete_outcome' object.id %}"
+                      ><i class="fas fa-trash text-danger"></i
+                    ></a>
                   </td>
                 </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -128,12 +139,16 @@
       <div class="card w-100 shadow p-3 mb-5 bg-body rounded-3">
         <div class="card-body">
           <h5 class="card-title text-center p-2">
-            {{cattitle}} ning shu oydagi barcha chiqimlari:
+            <span>{{cattitle}} ning shu oydagi barcha chiqimlari:</span>
+            <span class="formatNum" style="margin-left: 20px; color: red"
+              >{{total}}</span
+            >
           </h5>
-          <h5 class="card-title p-3 pt-3">
+          <h6 class="card-title text-center p-2"></h6>
+          <h6 class="card-title p-3 pt-3">
             <span>Jami : </span>
-            <span class="formatNum">{{total_otherday}}</span>
-          </h5>
+            <span class="formatNum" style="color: red">{{total_otherday}}</span>
+          </h6>
           <div
             style="margin-bottom: 10xp"
             class="table-responsive overflow-scroll"
@@ -146,25 +161,30 @@
                   <th>Sana*</th>
                 </thead>
                 <tbody>
+                  {% for month_da in month_datas %}
                   <tr>
                     <td>
-                      {% for otherday_out in otherday_outcome %}
-                      <p style="margin-left: 10px" class="formatNum">
-                        {{otherday_out}}
+                      <p
+                        style="margin-left: 10px; color: red"
+                        class="formatNum"
+                      >
+                        {{month_da.outcome}}
                       </p>
-                      {% endfor %}
                     </td>
                     <td>
-                      {% for otherday_des in otherday_descript %}
-                      <p>{{otherday_des|slice:":20"}}</p>
-                      {% endfor %}
+                      <p>{{month_da.description|slice:":20"}}</p>
                     </td>
                     <td>
-                      {% for otherday_da in otherday_date %}
-                      <p>{{otherday_da}}</p>
-                      {% endfor %}
+                      <p>{{month_da.date}}</p>
+                    </td>
+                    {% if request.user.username == "Abdulboriy" %}
+                    <td>
+                      <a href="{% url 'main:delete_outcome' month_da.id %}"
+                        ><i class="fas fa-trash text-danger"></i
+                      ></a>
                     </td>
                   </tr>
+                  {% else %} {% endif %} {% endfor %}
                 </tbody>
               </table>
             </div>

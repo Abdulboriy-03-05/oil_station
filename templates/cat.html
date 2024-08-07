@@ -579,11 +579,23 @@
                 <td class="formatNum" style="color: #1d98ffff">
                   {{obj.sum_half}}
                 </td>
-                <td class="formatNum" style="color: #1d98ffff">
-                  {{obj.have_money}}
+                <td>
+                  <a
+                    class="formatKub"
+                    style="color: #1d98ffff; text-decoration: none"
+                    href="{% url 'main:detail' obj.id %}"
+                  >
+                    {{obj.have_money}}</a
+                  >
                 </td>
-                <td class="formatNum" style="color: #1d98ffff">
-                  {{obj.no_money}}
+                <td>
+                  <a
+                    class="formatKub"
+                    style="color: #1d98ffff; text-decoration: none"
+                    href="{% url 'main:detail' obj.id %}"
+                  >
+                    {{obj.no_money}}</a
+                  >
                 </td>
                 <td class="formatNum" style="color: #1d98ffff">
                   {{obj.profit}}

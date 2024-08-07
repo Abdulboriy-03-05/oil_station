@@ -12,7 +12,16 @@ class AddMainGasForm(forms.ModelForm):
             "category":Select(attrs={'class': 'input',"id":"input_add_gas"})
         }
 
-
+class AddExtraGasForm(forms.ModelForm):
+    
+    class Meta:
+        model = Addmaingas
+        fields = ("last_gas","category","date")
+        widgets = {
+            "category":Select(attrs={'class': 'input',"id":"input_add_gas"}),
+            "last_gas":TextInput(attrs={'class':'input',"type":"number","id":"input_add_gas"}),
+            "date":TextInput(attrs={'class':'input',"type":"date","id":"input_add_gas"}),
+        }
 
 class Addbank(forms.ModelForm):
     

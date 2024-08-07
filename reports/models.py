@@ -199,7 +199,7 @@ class Main_XR_income(models.Model):
         verbose_name = "Asosiy Income X/R"
     
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
 
 
 
@@ -207,6 +207,8 @@ class Main_XR_income(models.Model):
 class Main_XR_outcome(models.Model):
     category = models.ForeignKey(Filial,verbose_name="Main_XR_outcome", on_delete=models.DO_NOTHING, default=None,null=True,related_name="main_outcome")
     outcome = models.IntegerField("Main_outcome",default=0,null=True,blank=True)
+    out_prot = models.IntegerField("Main_outcome",default=0,null=True,blank=True)
+    where = models.CharField("Qayerga",max_length=50,null=True,blank=True)
     description = models.TextField("Izoh")
     date = models.DateField("Vaqt",)
 
@@ -215,7 +217,7 @@ class Main_XR_outcome(models.Model):
         verbose_name = "Asosiy Outcome X/R"
     
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
     
 
 class Xududgaz_XR(models.Model):
@@ -227,7 +229,7 @@ class Xududgaz_XR(models.Model):
         verbose_name = "Xududgaz xisob"
 
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
     
 
 
@@ -241,7 +243,7 @@ class Xudud_XR_income(models.Model):
         verbose_name = "Xudud gaz Income X/R"
     
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
 
 
 
@@ -257,7 +259,7 @@ class Xudud_XR_outcome(models.Model):
         verbose_name = "Xudud gaz Outcome X/R"
     
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
     
 
 
@@ -271,7 +273,7 @@ class Aksiz_XR(models.Model):
         verbose_name = "Aksiz xisob"
 
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
     
 
 
@@ -285,7 +287,7 @@ class Aksiz_XR_income(models.Model):
         verbose_name = "Aksiz Income X/R"
     
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
 
 
 
@@ -300,7 +302,7 @@ class Aksiz_XR_outcome(models.Model):
         verbose_name = "Aksiz Outcome X/R"
     
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
     
 
 
@@ -314,7 +316,7 @@ class Elector_XR(models.Model):
         verbose_name_plural = "Elektro svet"
 
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
 
 
 
@@ -330,7 +332,7 @@ class Elector_XR_income(models.Model):
         verbose_name_plural = "Elektor svet income X/R"
     
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
     
 
 
@@ -346,7 +348,7 @@ class Elector_XR_outcome(models.Model):
         verbose_name_plural = "Elektor svet outcome X/R"
     
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
 
 
 
@@ -361,7 +363,7 @@ class Company_XR(models.Model):
         verbose_name_plural = "Tashkilotlar"
 
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
     
 
 
@@ -376,7 +378,7 @@ class Company_XR_income(models.Model):
         verbose_name = "Tashkilotlar Income X/R"
     
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
     
 
 
@@ -391,7 +393,7 @@ class Debts(models.Model):
         verbose_name = "Qarzlar bergan"
     
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
 
 
 
@@ -404,11 +406,11 @@ class Credit(models.Model):
         verbose_name = 'Kredit to\'lov'
 
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
 
 
 class Credit_income(models.Model):
-    category = models.ForeignKey(Filial,verbose_name="Qaysi filialga", on_delete=models.DO_NOTHING, default=None,null=True,related_name="kredit_income")
+    category = models.ForeignKey(Filial,verbose_name="Qaysi filial", on_delete=models.DO_NOTHING, default=None,null=True,related_name="kredit_income")
     dollar = models.IntegerField("Dollar",default=0,null=True,blank=True)
     income = models.IntegerField("So'm",default=0,null=True,blank=True)
     date = models.DateField("Vaqt",)
@@ -419,7 +421,7 @@ class Credit_income(models.Model):
         verbose_name = "Kredit income"
     
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
 
 
 class Others(models.Model):
@@ -432,7 +434,7 @@ class Others(models.Model):
         verbose_name = 'Boshqalar uchun to\'lov'
 
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
 
 
 
@@ -464,7 +466,7 @@ class Income_XRS(models.Model):
         verbose_name = "Xisob raqamga pul o'tkaz"
 
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
 
 
 
@@ -497,7 +499,7 @@ class Manag_add_gas(models.Model):
 
 
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
     
 
 
@@ -527,7 +529,7 @@ class Manag_totals(models.Model):
 
 
     def __str__(self):
-        return f"{self.category}"
+        return f"{self.category,self.date}"
 
 
 

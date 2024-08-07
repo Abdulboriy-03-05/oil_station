@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from datetime import datetime, timedelta
 from django.utils.timezone import now
 from .forms import *
@@ -218,17 +217,17 @@ def home(request):
                     cat_nas = com.category
                     dev_nas_com = ''.join(str(com.date))
                     nas_com_yes = 0
-                    print(nas_com_yes)
+                    # print(nas_com_yes)
                 if str(com.category) == "Sanoat tranzit":
                     cat_san = com.category
                     dev_san_com = ''.join(str(com.date))
                     san_com_yes = 0            
-                    print(san_com_yes)
+                    # print(san_com_yes)
                 if str(com.category) == "Parfum distibyuter":
                     cat_par = com.category
                     dev_par_com = ''.join(str(com.date))
                     par_com_yes = 0
-                    print(par_com_yes)
+                    # print(par_com_yes)
 
             if dev_nas_com not in str(today):
                 main_com = Company_XR.objects.create(category=cat_nas,bill = nas_com_yes, date=today)
@@ -241,9 +240,9 @@ def home(request):
             if dev_par_com not in str(today):
                 main_com = Company_XR.objects.create(category=cat_par,bill = par_com_yes, date=today)
                 main_com.save()
-            print(today_1)
+            # print(today_1)
         else:
-            print("Bugun emas")
+            # print("Bugun emas")
             for com in main_company:
                 if str(com.category) == "Nasirullo xoji":
                     cat_nas = com.category
@@ -385,7 +384,7 @@ def home(request):
             if str(cat) in "Parfum distibyuter":
                 add += 1
 
-        print(add)
+        # print(add)
         context = {
             "add":add,
             "categories":obj,
@@ -418,59 +417,57 @@ def home(request):
         return render(request, 'director.html',context,)
     else:
         return redirect ("/account/login")
-
+    
+def get_month_date_range():
+    today = datetime.today()
+    first_day_of_current_month = today.replace(day=1)
+    last_day_of_current_month = today - timedelta(days=1)
+    
+    return first_day_of_current_month, last_day_of_current_month
 
 def nasirullo_outcome(request):
     category_1 = Filial.objects.all()
-    category = Filial.objects.get(id=1)
+    for cat in category_1:
+        if str(cat) in "Nasirullo xoji":
+            category = cat
     today = datetime.today()
-    current_month = now().month
-    this_month = Main_XR_outcome.objects.select_related('category').filter(category=category,date__month=current_month)
+    this_month = Main_XR_outcome.objects.select_related('category').filter(category=category)
+
     total_otherday = 0
-    otherday_outcome = []
-    otherday_descript = []
-    otherday_date = []
 
     total_today = 0
-    today_outcome = []
-    today_descript = []
-    today_date = []
-
-
 
     for y in this_month:
         if str(y.date) not in str(today):
-            otherday_outcome.append(y.outcome)
-            otherday_descript.append(y.description)
-            otherday_date.append(y.date)
             # print(y.outcome,y.description, y.date)
+            start_date, end_date = get_month_date_range()
+            month_data = Main_XR_outcome.objects.select_related('category').filter(category=category,date__gte=start_date, date__lte=end_date)
+
+             
+
         if str(y.date) in str(today):
             # print("Today",today_out.outcome,today_out.description)
-            today_outcome.append(y.outcome)
-            today_descript.append(y.description)
-            today_date.append(y.date)
+            today_object =  Main_XR_outcome.objects.select_related('category').filter(category=category,date = today)
+            
+            for today_out in today_object:
+                total_today += today_out.outcome
+    
+    for month_da in month_data:
+        total_otherday += month_da.outcome  
+        
+    if total_today == 0:
+        today_object = 0
 
-    for otherday_out in otherday_outcome:
-        total_otherday += otherday_out
 
-
-    for today_out in today_outcome:
-        total_today += today_out
     total = total_otherday + total_today
-
     context = {
+
         "total":total,
         "categories":category_1,
         "cattitle":category,
-        "otherday_outcome":otherday_outcome,
-        "otherday_descript":otherday_descript,
-        "otherday_date":otherday_date,
+        "today_objects":today_object,
+        "month_datas":month_data,
         "total_otherday":total_otherday,
-
-
-        "today_outcome":today_outcome,
-        "today_descript":today_descript,
-        "today_date":today_date,
         "total_today":total_today,
 
     }
@@ -481,120 +478,164 @@ def nasirullo_outcome(request):
 
 def sanoat_outcome(request):
     category_1 = Filial.objects.all()
-    category = Filial.objects.get(id=2)
+    for cat in category_1:
+        if str(cat) in "Sanoat tranzit":
+            category = cat
     today = datetime.today()
-    current_month = now().month
-    this_month = Main_XR_outcome.objects.filter(category=category,date__month=current_month)
+    this_month = Main_XR_outcome.objects.select_related('category').filter(category=category)
+
     total_otherday = 0
-    otherday_outcome = []
-    otherday_descript = []
-    otherday_date = []
 
     total_today = 0
-    today_outcome = []
-    today_descript = []
-    today_date = []
-
 
     for y in this_month:
         if str(y.date) not in str(today):
-            otherday_outcome.append(y.outcome)
-            otherday_descript.append(y.description)
-            otherday_date.append(y.date)
             # print(y.outcome,y.description, y.date)
+            start_date, end_date = get_month_date_range()
+            month_data = Main_XR_outcome.objects.select_related('category').filter(category=category,date__gte=start_date, date__lte=end_date)
+
+
         if str(y.date) in str(today):
             # print("Today",today_out.outcome,today_out.description)
-            today_outcome.append(y.outcome)
-            today_descript.append(y.description)
-            today_date.append(y.date)
+            today_object =  Main_XR_outcome.objects.select_related('category').filter(category=category,date = today)
             
+            for today_out in today_object:
+                total_today += today_out.outcome
+      
+    for month_da in month_data:
+        total_otherday += month_da.outcome   
+        
+    if total_today == 0:
+        today_object = 0
 
-    for otherday_out in otherday_outcome:
-        total_otherday += otherday_out
-
-
-    for today_out in today_outcome:
-        total_today += today_out
 
     total = total_otherday + total_today
     context = {
+
         "total":total,
         "categories":category_1,
         "cattitle":category,
-        "otherday_outcome":otherday_outcome,
-        "otherday_descript":otherday_descript,
-        "otherday_date":otherday_date,
+        "today_objects":today_object,
+        "month_datas":month_data,
         "total_otherday":total_otherday,
-
-
-        "today_outcome":today_outcome,
-        "today_descript":today_descript,
-        "today_date":today_date,
         "total_today":total_today,
 
     }
 
     return render(request, "mainout.html" , context)
-
 
 
 
 def parfum_outcome(request):
     category_1 = Filial.objects.all()
-    category = Filial.objects.get(id=3)
+    for cat in category_1:
+        if str(cat) in "Parfum distibyuter":
+            category = cat
     today = datetime.today()
-    current_month = now().month
-    this_month = Main_XR_outcome.objects.select_related('category').filter(category=category,date__month=current_month)
+    this_month = Main_XR_outcome.objects.select_related('category').filter(category=category)
+
     total_otherday = 0
-    otherday_outcome = []
-    otherday_descript = []
-    otherday_date = []
 
     total_today = 0
-    today_outcome = []
-    today_descript = []
-    today_date = []
-
 
     for y in this_month:
         if str(y.date) not in str(today):
-            otherday_outcome.append(y.outcome)
-            otherday_descript.append(y.description)
-            otherday_date.append(y.date)
             # print(y.outcome,y.description, y.date)
+            start_date, end_date = get_month_date_range()
+            month_data = Main_XR_outcome.objects.select_related('category').filter(category=category,date__gte=start_date, date__lte=end_date)
+  
+
         if str(y.date) in str(today):
             # print("Today",today_out.outcome,today_out.description)
-            today_outcome.append(y.outcome)
-            today_descript.append(y.description)
-            today_date.append(y.date)
+            today_object =  Main_XR_outcome.objects.select_related('category').filter(category=category,date = today)
             
+            for today_out in today_object:
+                total_today += today_out.outcome
+      
+    for month_da in month_data:
+        total_otherday += month_da.outcome 
 
-    for otherday_out in otherday_outcome:
-        total_otherday += otherday_out
+    if total_today == 0:
+        today_object = 0
 
-
-    for today_out in today_outcome:
-        total_today += today_out
 
     total = total_otherday + total_today
     context = {
+
         "total":total,
         "categories":category_1,
         "cattitle":category,
-        "otherday_outcome":otherday_outcome,
-        "otherday_descript":otherday_descript,
-        "otherday_date":otherday_date,
+        "today_objects":today_object,
+        "month_datas":month_data,
         "total_otherday":total_otherday,
-
-
-        "today_outcome":today_outcome,
-        "today_descript":today_descript,
-        "today_date":today_date,
         "total_today":total_today,
 
     }
 
     return render(request, "mainout.html" , context)
+
+
+def delete_outcome(request, p_id):
+    todo = get_object_or_404(Main_XR_outcome, id=p_id)
+    today = datetime.today()
+    where = todo.where
+    print(where)
+    sum = todo.outcome
+    print(sum)
+    cat = todo.category
+    print(cat)
+    date = todo.date
+    print(date)
+    out_prot = todo.out_prot
+    print(out_prot)
+    if where == 'gaz':
+        main_xr = Main_XR.objects.select_related('category').get(category=cat,date=today)
+        minus_xr = main_xr.bill
+        print(minus_xr,"sum_1")
+        main_xr.bill = minus_xr + sum
+        print(main_xr.bill,"sum_2")
+        main_xr.save()
+
+        xudud_xr = Xududgaz_XR.objects.select_related('category').get(category=cat,date=today)
+        xudud_xr_add = xudud_xr.bill
+        print(xudud_xr_add,"gaz")
+        xudud_xr.bill = xudud_xr_add - out_prot
+        print(xudud_xr.bill,"gaz_2")
+        xudud_xr.save()
+        xudud_xr_income = Xudud_XR_income.objects.select_related('category').filter(category=cat,income=out_prot,date=date)
+        for x in xudud_xr_income:
+            print(x.income,"income",x.id)
+        print(x.id)
+        delet_gas_income = Xudud_XR_income.objects.select_related('category').get(category=cat,income=out_prot,id=x.id,date=date)
+        delet_gas_income.delete()
+        print(delet_gas_income.id)
+    else:
+        print("Xudud ga qo'shilmadi")
+        print("gaz")
+    if where == 'aksiz':
+        print("aksiz")
+    if where == 'elektor':
+        print("elektor")
+    if where == 'boshqa':
+        print("boshqa")
+    if where == 'qarz':
+        print("qarz")
+    if where == 'kredit':
+        print("kredit")
+
+
+    todo.delete()
+
+    cat = todo.category
+    if str(cat) == "Nasirullo xoji":
+        return redirect('main:nasirullo_outcome')
+    if str(cat) == "Sanoat tranzit":
+        return redirect('main:sanoat_outcome')
+    if str(cat) == "Parfum distibyuter":
+        return redirect('main:parfum_outcome')
+
+    
+
 
 
 
@@ -977,8 +1018,6 @@ def postDetail(request,p_id):
 
 
 
-
-
 def nasgasraports(request):
     category = Filial.objects.all()
     for cat in category:
@@ -1309,14 +1348,6 @@ def parfumelelectorraports(request):
 
 
 
-
-
-
-
-
-
-
-
 def get_previous_month_date_range():
     today = datetime.today()
     first_day_of_current_month = today.replace(day=1)
@@ -1324,6 +1355,7 @@ def get_previous_month_date_range():
     first_day_of_previous_month = last_day_of_previous_month.replace(day=1)
     
     return first_day_of_previous_month, last_day_of_previous_month
+
 
 def all_sale_gas_nas(request):
     if request.user.is_staff:
@@ -1386,8 +1418,6 @@ def all_sale_gas_par(request):
         start_date, end_date = get_previous_month_date_range()
         previous_month_data = Addmaingas.objects.select_related('category').filter(category=category_name,date__gte=start_date, date__lte=end_date)
 
-        for x in obj:
-            total_sum += x.buy_sum
         context = {
             "categories":category,
             "category_name":category_name,
@@ -1420,7 +1450,6 @@ def category_list(request, category_slug):
     total_profit = 0
     obj = Filial.objects.all()
     category = Filial.objects.get(slug=category_slug)
-    current_month = now().month
 
 
 
@@ -1716,133 +1745,121 @@ def addmaingasyes(request):
     buy = Buyprice.objects.get()
     aksiz_tax = Aksiz.objects.get()
     elek_tax = Elector.objects.get()
-    yesterday = datetime.now() - timedelta(days=1)
-    yesterday_befor = datetime.now() - timedelta(days=2)
-    yesterday_befor_1 = yesterday_befor.strftime('%Y-%m-%d')
     if request.user.is_staff:
         if request.method == "POST":
-            form = AddMainGasForm(request.POST)
+            form = AddExtraGasForm(request.POST)
             if form.is_valid():
                 f = form.save(commit=False)
                 cat = f.category
-                station_gas = Manag_totals.objects.select_related('category').filter(category=cat)
-                for gas in station_gas:
-                    if str(gas.date) in str(yesterday_befor_1):
-                        # print("Bor davay")
-                        gases = Addmaingas.objects.select_related('category').filter(category=cat)
-                        for fil in gases:
-                            if str(fil.date) in str(yesterday_befor_1):
-                                message_1 = "Ma'lumot qo'shilgan"
-                                message_2 = "Iltimos ma'lumotlaringizni tekshiring"
-                                context = {
-                                    "message_1":message_1,
-                                    "message_2":message_2,
-                                }
-                                return render(request, "add_gas_error.html", context)
-                            else:
-                                f.author = request.user
-                                gas_main_remain = f.last_gas
-                                f.sale_price = sale_sum.saleprice
-                                station = Manag_totals.objects.select_related('category').get(category = cat, date=yesterday_befor_1)
+                date = f.date
+                date_1 = date + timedelta(days=1)
 
-                                
-                                f.buygasprice = buy.buyprice
-                                all_sum_buy = gas_main_remain * buy.buyprice
-                                f.buy_sum = all_sum_buy
-                                xudud_xr = Xududgaz_XR.objects.select_related('category').get(category=cat,date=yesterday)
-                                xudud_xr_add = xudud_xr.bill
-                                xudud_add = xudud_xr_add - all_sum_buy
-                                xudud_xr.bill = xudud_add
-                                xudud_xr.save()
-
-                                xudud_xr_outcome = Xudud_XR_outcome.objects.create(category=cat,outcome = all_sum_buy)
-                                xudud_xr_outcome.save()
-
-                                f.elector = elek_tax.elector
-                                all_sum_elek = gas_main_remain * elek_tax.elector
-                                f.elec_sum = all_sum_elek
-                                elek_xr = Elector_XR.objects.select_related('category').get(category=cat,date=yesterday)
-                                elek_xr_add = elek_xr.bill
-                                elek_add = elek_xr_add - all_sum_elek
-                                elek_xr.bill = elek_add
-                                elek_xr.save()
-
-                                elek_xr_outcome = Elector_XR_outcome.objects.create(category=cat,outcome = all_sum_elek)
-                                elek_xr_outcome.save()
-
-                                
-                                f.aksiz = aksiz_tax.aksiz
-                                lose_gas = gas_main_remain / 100
-                                if str(cat) == "Nasirullo xoji":
-                                    lose_gas_2 = lose_gas * lose_nas.losegas
-                                    f.lose_gas = lose_gas_2
-                                if str(cat) == "Sanoat tranzit":
-                                    lose_gas_2 = lose_gas * lose_san.losegas
-                                    f.lose_gas = lose_gas_2
-                                if str(cat) == "Parfum distibyuter":
-                                    lose_gas_2 = lose_gas * lose_par.losegas
-                                    f.lose_gas = lose_gas_2
-                                lose_gas_3 = gas_main_remain - lose_gas_2
-                                f.remain_gas = lose_gas_3
-                                print(lose_gas_3)
-                                all_sum_aksiz = lose_gas_3 * aksiz_tax.aksiz
-                                f.aksiz_sum = all_sum_aksiz
-                                aksiz_xr = Aksiz_XR.objects.get(category=cat,date=yesterday)
-                                aksiz_xr_add = aksiz_xr.bill
-                                aksiz_add = aksiz_xr_add - all_sum_aksiz
-                                aksiz_xr.bill = aksiz_add
-                                aksiz_xr.save()
-
-                                aksiz_xr_outcome = Aksiz_XR_outcome.objects.create(category=cat,outcome = all_sum_aksiz)
-                                aksiz_xr_outcome.save()
-
-
-
-                                sum_half = lose_gas_3 * sale_sum.saleprice
-                                print(sum_half)
-                                f.total_sum = sum_half
-                                f.card = station.card
-                                chec_1 =  sum_half - station.company
-                                f.chec = chec_1 - station.card
-                                f.card_uz = station.card_uz
-                                f.card_humo = station.card_humo
-                                f.company = station.company
-                                company = Company_XR.objects.select_related('category').get(category=cat,date=yesterday)
-                                minus_xr = company.bill
-                                company_minus = minus_xr + f.company
-                                company.bill = company_minus
-                                company.save()
-
-                                company_income = Company_XR_income.objects.create(category=cat,income=f.company,date=yesterday)
-                                company_income.save()
-                                out_com = sum_half - station.company
-                                f.sum_half = out_com
-                                f.no_money = out_com
-                                profit = sum_half - all_sum_buy
-                                profit_1 = profit - all_sum_aksiz
-                                profit_2 = profit_1 - all_sum_elek
-                                f.profit = profit_2
-                                f.date = yesterday_befor
-                                f.save()
-
-                                if str(cat) == "Nasirullo xoji":
-                                    return redirect('/nasirullo-xoji/category/')
-                                if str(cat) == "Sanoat tranzit":
-                                    return redirect('/sanoat-tranzit/category/')
-                                if str(cat) == "Parfum distibyuter":
-                                    return redirect('/parfum-distibyuter/category/')
-                    else:
-                        print("Yo'q") 
-                        message_1 = "Malumot kirita olmaysiz!"
-                        message_2 = f"{cat} zaprafkaning {yesterday_befor_1} kungi ma'lumoti kiritlmagan \n  Iltimos ma'lumotni kiritishini kuting yoki \n ma'lumot kiritish kerakligini habarini berin"
+                print(date)
+                print(date_1)
+                gases = Addmaingas.objects.select_related('category').filter(category=cat)
+                for fil in gases:
+                    if str(fil.date) in str(date):
+                        message_1 = "Ma'lumot qo'shilgan"
+                        message_2 = "Iltimos ma'lumotlaringizni tekshiring"
                         context = {
                             "message_1":message_1,
                             "message_2":message_2,
                         }
                         return render(request, "add_gas_error.html", context)
+                    else:
+                        f.author = request.user
+                        gas_main_remain = f.last_gas
+                        f.sale_price = sale_sum.saleprice
+                        station = Manag_totals.objects.select_related('category').get(category = cat, date=date)
+
+                        
+                        f.buygasprice = buy.buyprice
+                        all_sum_buy = gas_main_remain * buy.buyprice
+                        f.buy_sum = all_sum_buy
+                        xudud_xr = Xududgaz_XR.objects.select_related('category').get(category=cat,date=date_1)
+                        xudud_xr_add = xudud_xr.bill
+                        xudud_add = xudud_xr_add - all_sum_buy
+                        xudud_xr.bill = xudud_add
+                        xudud_xr.save()
+
+                        xudud_xr_outcome = Xudud_XR_outcome.objects.create(category=cat,outcome = all_sum_buy)
+                        xudud_xr_outcome.save()
+
+                        f.elector = elek_tax.elector
+                        all_sum_elek = gas_main_remain * elek_tax.elector
+                        f.elec_sum = all_sum_elek
+                        elek_xr = Elector_XR.objects.select_related('category').get(category=cat,date=date_1)
+                        elek_xr_add = elek_xr.bill
+                        elek_add = elek_xr_add - all_sum_elek
+                        elek_xr.bill = elek_add
+                        elek_xr.save()
+
+                        elek_xr_outcome = Elector_XR_outcome.objects.create(category=cat,outcome = all_sum_elek)
+                        elek_xr_outcome.save()
+
+                        
+                        f.aksiz = aksiz_tax.aksiz
+                        lose_gas = gas_main_remain / 100
+                        if str(cat) == "Nasirullo xoji":
+                            lose_gas_2 = lose_gas * lose_nas.losegas
+                            f.lose_gas = lose_gas_2
+                        if str(cat) == "Sanoat tranzit":
+                            lose_gas_2 = lose_gas * lose_san.losegas
+                            f.lose_gas = lose_gas_2
+                        if str(cat) == "Parfum distibyuter":
+                            lose_gas_2 = lose_gas * lose_par.losegas
+                            f.lose_gas = lose_gas_2
+                        lose_gas_3 = gas_main_remain - lose_gas_2
+                        f.remain_gas = lose_gas_3
+                        print(lose_gas_3)
+                        all_sum_aksiz = lose_gas_3 * aksiz_tax.aksiz
+                        f.aksiz_sum = all_sum_aksiz
+                        aksiz_xr = Aksiz_XR.objects.get(category=cat,date=date_1)
+                        aksiz_xr_add = aksiz_xr.bill
+                        aksiz_add = aksiz_xr_add - all_sum_aksiz
+                        aksiz_xr.bill = aksiz_add
+                        aksiz_xr.save()
+
+                        aksiz_xr_outcome = Aksiz_XR_outcome.objects.create(category=cat,outcome = all_sum_aksiz)
+                        aksiz_xr_outcome.save()
+
+
+
+                        sum_half = lose_gas_3 * sale_sum.saleprice
+                        print(sum_half)
+                        f.total_sum = sum_half
+                        f.card = station.card
+                        chec_1 =  sum_half - station.company
+                        f.chec = chec_1 - station.card
+                        f.card_uz = station.card_uz
+                        f.card_humo = station.card_humo
+                        f.company = station.company
+                        company = Company_XR.objects.select_related('category').get(category=cat,date=date_1)
+                        minus_xr = company.bill
+                        company_minus = minus_xr + f.company
+                        company.bill = company_minus
+                        company.save()
+
+                        company_income = Company_XR_income.objects.create(category=cat,income=f.company,date=date_1)
+                        company_income.save()
+                        out_com = sum_half - station.company
+                        f.sum_half = out_com
+                        f.no_money = out_com
+                        profit = sum_half - all_sum_buy
+                        profit_1 = profit - all_sum_aksiz
+                        profit_2 = profit_1 - all_sum_elek
+                        f.profit = profit_2
+                        f.save()
+
+                        if str(cat) == "Nasirullo xoji":
+                            return redirect('/nasirullo-xoji/category/')
+                        if str(cat) == "Sanoat tranzit":
+                            return redirect('/sanoat-tranzit/category/')
+                        if str(cat) == "Parfum distibyuter":
+                            return redirect('/parfum-distibyuter/category/')
 
         else:
-            form = AddMainGasForm()
+            form = AddExtraGasForm()
             print("NOT " * 5)
         
         context = {
@@ -1898,20 +1915,27 @@ def additionalmoney(request):
 def get_money(request):
     obj = Filial.objects.all()
     today = datetime.today()
+    send = Send.objects.get()
     if request.user.is_staff:
         if request.method == "POST":
             form = GetMoneyeachForm(request.POST)
             if form.is_valid():
                 f = form.save(commit=False)
+                send_tax = send.send_tax
                 lend_money = Main_XR.objects.select_related('category').get(category=f.bring_money,date=today)
                 print(lend_money.bill,f.bring_money,lend_money.category)
-                lend = lend_money.bill - f.bill
-                lend_money.bill = lend
+                minus_xr = lend_money.bill
+                sum = f.bill
+                tax = sum / 100
+                tax_1 = tax * send_tax
+                tax_2 = sum + tax_1
+                main_minus = minus_xr - tax_2
+                lend_money.bill = main_minus
                 print(f.bill)
                 print(lend_money.bill)
                 lend_money.save()
 
-                lend_out = Main_XR_outcome.objects.create(category=f.bring_money,outcome = f.bill,description = f"{f.get_money} ga qarz",date=today)
+                lend_out = Main_XR_outcome.objects.create(category=f.bring_money,outcome = tax_2,out_prot=sum,where="qarz",description = f"{f.get_money} ga qarz",date=today)
                 lend_out.save()
 
                 debt = Debts.objects.create(category=f.bring_money,debt = f.bill,date=today)
@@ -1975,7 +1999,7 @@ def addincome(request):
                     main_minus = minus_xr - tax_2
                     main_xr.bill = main_minus
                     main_xr.save()
-                    main_outcome = Main_XR_outcome.objects.create(category=cat,outcome = tax_2,description=f.description,date=today)
+                    main_outcome = Main_XR_outcome.objects.create(category=cat,outcome = tax_2,out_prot=sum,where='gaz',description=f.description,date=today)
                     main_outcome.save()
 
 
@@ -2002,7 +2026,7 @@ def addincome(request):
                     main_minus = minus_xr - tax_2
                     main_xr.bill = main_minus
                     main_xr.save()
-                    main_outcome = Main_XR_outcome.objects.create(category=cat,outcome = tax_2,description=f.description,date=today)
+                    main_outcome = Main_XR_outcome.objects.create(category=cat,outcome = tax_2,out_prot=sum,where='aksiz',description=f.description,date=today)
                     main_outcome.save()
 
                 
@@ -2029,7 +2053,7 @@ def addincome(request):
                     main_minus = minus_xr - tax_2
                     main_xr.bill = main_minus
                     main_xr.save()
-                    main_outcome = Main_XR_outcome.objects.create(category=cat,outcome = tax_2,description=f.description,date=today)
+                    main_outcome = Main_XR_outcome.objects.create(category=cat,outcome = tax_2,out_prot=sum,where='elektor',description=f.description,date=today)
                     main_outcome.save()
 
 
@@ -2056,7 +2080,7 @@ def addincome(request):
                     main_minus = minus_xr - tax_2
                     main_xr.bill = main_minus
                     main_xr.save()
-                    main_outcome = Main_XR_outcome.objects.create(category=cat,outcome = tax_2,description=f.description,date=today)
+                    main_outcome = Main_XR_outcome.objects.create(category=cat,outcome = tax_2,out_prot=sum,where='boshqa',description=f.description,date=today)
                     main_outcome.save()
 
                     others_income = Others.objects.create(category=cat,income = sum,description=f.description,date=today)
@@ -2110,7 +2134,7 @@ def pay_credit(request):
                 main_minus = minus_xr - tax_2
                 main_xr.bill = main_minus
                 main_xr.save()
-                main_outcome = Main_XR_outcome.objects.create(category=cat,outcome = tax_2,description="Kredit uchun to'lov",date=today)
+                main_outcome = Main_XR_outcome.objects.create(category=cat,outcome = tax_2,out_prot=sum,where='kredit',description="Kredit uchun to'lov",date=today)
                 main_outcome.save()
 
 
